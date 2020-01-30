@@ -14,12 +14,12 @@
 
         public int Multiply(int x, int y)
         {
-            return x - y;
+            return x * y;
         }
 
-        public float Divide(int x, int y)
+        public double Divide(int x, int y)
         {
-            return x / y;
+            return (double)x / y;
         }
     }
 }
