@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ConsoleCalculator.Tests
+namespace ConsoleCalculator.Tests.Tests
 {
     [TestClass]
     public class CalculatorTests
