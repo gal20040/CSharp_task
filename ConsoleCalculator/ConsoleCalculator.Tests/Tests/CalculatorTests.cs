@@ -193,6 +193,5 @@ namespace ConsoleCalculator.Tests.Tests
             var actual = calc.Divide(x, y);
         }
         #endregion
-
     }
 }
