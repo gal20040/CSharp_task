@@ -1,24 +1,29 @@
-﻿namespace ConsoleCalculator
+﻿using System;
+
+namespace ConsoleCalculator
 {
-    class Calculator
+    public class Calculator
     {
-        public int Sum(int x, int y)
+        public double Sum(double x, double y)
         {
             return x + y;
         }
 
-        public int Subtract(int x, int y)
+        public double Subtract(double x, double y)
         {
             return x - y;
         }
 
-        public int Multiply(int x, int y)
+        public double Multiply(double x, double y)
         {
             return x * y;
         }
 
-        public double Divide(int x, int y)
+        public double Divide(double x, double y)
         {
+            if (y == 0)
+                throw new DivideByZeroException($"Denominator must not be equal 0.");
+
             return (double)x / y;
         }
     }
