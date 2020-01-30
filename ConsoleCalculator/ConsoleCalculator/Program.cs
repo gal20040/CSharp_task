@@ -15,10 +15,20 @@ namespace ConsoleCalculator
             else
                 input = "3+1";
 
+            var calc = new Calculator();
+
+            Console.WriteLine(calc.Sum(1, 10));
+            Console.WriteLine(calc.Sum(1, -10));
+            Console.WriteLine(calc.Divide(1, 10));
+            Console.WriteLine(calc.Multiply(2, 10));
+            Console.WriteLine(calc.Subtract(1, 10));
+
+
+
             Console.WriteLine(input);
             Console.WriteLine(args.Length);
 
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }
