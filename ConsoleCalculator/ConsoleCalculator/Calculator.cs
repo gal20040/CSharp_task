@@ -4,6 +4,7 @@ namespace ConsoleCalculator
 {
     public class Calculator
     {
+        #region Operations
         public double Sum(double x, double y)
         {
             return x + y;
@@ -26,5 +27,6 @@ namespace ConsoleCalculator
 
             return (double)x / y;
         }
+        #endregion
     }
 }

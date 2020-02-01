@@ -4,13 +4,13 @@ namespace ConsoleCalculator
 {
     public class Token : IComparable<Token>
     {
-        public TokenTypes TokenType { get; set; }
+        public TokenTypes TokenType { get; private set; }
 
-        public double Number { get; set; }
-
-        public int Priority { get; set; }
+        public double Number { get; private set; }
 
         #region ctor
+        private Token() {}
+
         public Token(double number)
         {
             TokenType = TokenTypes.Number;
@@ -23,22 +23,18 @@ namespace ConsoleCalculator
             {
                 case (char)TokenTypes.Plus:
                     TokenType = TokenTypes.Plus;
-                    Priority = 1;
                     break;
 
                 case (char)TokenTypes.Minus:
                     TokenType = TokenTypes.Minus;
-                    Priority = 1;
                     break;
 
                 case (char)TokenTypes.Multiplication:
                     TokenType = TokenTypes.Multiplication;
-                    Priority = 2;
                     break;
 
                 case (char)TokenTypes.Division:
                     TokenType = TokenTypes.Division;
-                    Priority = 2;
                     break;
 
                 case (char)TokenTypes.OpeningBracket:
@@ -55,6 +51,14 @@ namespace ConsoleCalculator
         }
         #endregion
 
+        public static Token GetStopperToken()
+        {
+            var token = new Token();
+            token.TokenType = TokenTypes.Stopper;
+
+            return token;
+        }
+
         public int CompareTo(Token other)
         {
             var tokenTypeComparison = TokenType.CompareTo(other.TokenType);
@@ -64,14 +68,12 @@ namespace ConsoleCalculator
                 return tokenTypeComparison;
             }
 
-            var priorityComparison = Priority.CompareTo(other.Priority);
-
-            if (priorityComparison != 0)
-            {
-                return priorityComparison;
-            }
-
             return Number.CompareTo(other.Number);
+        }
+
+        public override string ToString()
+        {
+            return $"TokenType={TokenType},\tNumber={Number}";
         }
     }
 
@@ -83,6 +85,9 @@ namespace ConsoleCalculator
         Multiplication = 42,
         Division = 47,
         OpeningBracket = 40,
-        ClosingBracket = 41
+        ClosingBracket = 41,
+
+        Stopper = 10, //LF 
+        Unassigned = 127
     }
 }

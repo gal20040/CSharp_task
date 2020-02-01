@@ -26,6 +26,9 @@ namespace ConsoleCalculator
                 return tokens;
             }
 
+            //начальный стоппер
+            tokens.Enqueue(Token.GetStopperToken());
+
             var number = string.Empty;
             for (int i = 0; i < input.Length; i++)
             {
@@ -51,24 +54,37 @@ namespace ConsoleCalculator
                 }
             }
 
+            //конечный стоппер
+            tokens.Enqueue(Token.GetStopperToken());
+
             return tokens;
         }
 
         public string TokensToString(string input)
         {
             var tokens = GetTokens(input);
+
+            return TokensToString(tokens);
+        }
+
+        public string TokensToString(Queue<Token> inputTokens)
+        {
             var result = "";
 
-            foreach (var token in tokens)
+            foreach (var token in inputTokens)
             {
+                if (token.TokenType == TokenTypes.Stopper)
+                {
+                    continue;
+                }
+
                 if (token.TokenType == TokenTypes.Number)
                 {
                     result += token.Number;
+                    continue;
                 }
-                else
-                {
-                    result += (char)token.TokenType;
-                }
+
+                result += (char)token.TokenType;
             }
 
             return result;
@@ -76,7 +92,7 @@ namespace ConsoleCalculator
 
         public string CleanUpInput(string input)
         {
-            for (int i = 0; i < input.Length; )
+            for (int i = 0; i < input.Length;)
             {
                 var @char = input[i];
 

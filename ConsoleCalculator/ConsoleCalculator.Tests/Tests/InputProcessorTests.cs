@@ -160,10 +160,9 @@ namespace ConsoleCalculator.Tests.Tests
         [TestMethod]
         public void GetTokens_0bsPlusBs9AsD1bsBs23bsMinusBsBs4bsMultiplyOpenBracket5Division6CloseBracket_0Plus9123Minus4MultyOpBr5Div6ClBrExpected()
         {
-            //Assert.AreEqual(new Token(0), new Token(0));
-
             const string input = "0 + 9AsD1  23 -  4 *(5/6)";
             var expected = new Queue<Token>();
+            expected.Enqueue(Token.GetStopperToken());
             expected.Enqueue(new Token(0));
             expected.Enqueue(new Token('+'));
             expected.Enqueue(new Token(9123));
@@ -175,6 +174,7 @@ namespace ConsoleCalculator.Tests.Tests
             expected.Enqueue(new Token('/'));
             expected.Enqueue(new Token(6));
             expected.Enqueue(new Token(')'));
+            expected.Enqueue(Token.GetStopperToken());
 
             var processor = new InputProcessor();
             Queue<Token> actual = processor.GetTokens(input);
