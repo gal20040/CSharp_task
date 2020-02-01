@@ -2,7 +2,7 @@
 
 namespace ConsoleCalculator
 {
-    public class Calculator
+    public class MathOperationsHelper
     {
         #region Operations
         public double Sum(double x, double y)

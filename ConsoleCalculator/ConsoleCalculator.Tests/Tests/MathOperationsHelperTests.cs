@@ -4,7 +4,7 @@ using System;
 namespace ConsoleCalculator.Tests.Tests
 {
     [TestClass]
-    public class CalculatorTests
+    public class MathOperationsHelperTests
     {
         #region Sum
         [TestMethod]
@@ -14,7 +14,7 @@ namespace ConsoleCalculator.Tests.Tests
             const double y = 30.3d;
             const double expected = 45.4d;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Sum(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -27,7 +27,7 @@ namespace ConsoleCalculator.Tests.Tests
             const double y = 40.9d;
             const double expected = 25.7d;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Sum(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -40,7 +40,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int y = 0;
             const int expected = 0;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Sum(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -55,7 +55,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int y = 30;
             const int expected = -15;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Subtract(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -68,7 +68,7 @@ namespace ConsoleCalculator.Tests.Tests
             const double y = 40.4d;
             const double expected = -55.5d;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Subtract(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -81,7 +81,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int y = 0;
             const int expected = 0;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Subtract(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -96,7 +96,7 @@ namespace ConsoleCalculator.Tests.Tests
             const double y = 30.2d;
             const double expected = 456.02d;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Multiply(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -109,7 +109,7 @@ namespace ConsoleCalculator.Tests.Tests
             const double y = 40.7d;
             const double expected = -618.64d;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Multiply(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -122,7 +122,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int y = 0;
             const int expected = 0;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Multiply(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -135,7 +135,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int y = 0;
             const int expected = 0;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             var actual = calc.Multiply(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -150,7 +150,7 @@ namespace ConsoleCalculator.Tests.Tests
             const double y = -0.7d;
             const double expected = -0.4285714285714286d;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             double actual = calc.Divide(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -163,7 +163,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int y = -15;
             const double expected = 3;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
             double actual = calc.Divide(x, y);
 
             Assert.AreEqual(expected, actual);
@@ -176,7 +176,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int x = 0;
             const int y = 0;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
 
             var actual = calc.Divide(x, y);
         }
@@ -188,7 +188,7 @@ namespace ConsoleCalculator.Tests.Tests
             const int x = 10;
             const int y = 0;
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
 
             var actual = calc.Divide(x, y);
         }

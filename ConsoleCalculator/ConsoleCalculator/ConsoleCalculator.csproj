@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculator.cs" />
+    <Compile Include="MathOperationsHelper.cs" />
     <Compile Include="InputProcessor.cs" />
     <Compile Include="PolishNotations\PolishNotationHelper.cs" />
     <Compile Include="PolishNotations\PolishNotation.cs" />

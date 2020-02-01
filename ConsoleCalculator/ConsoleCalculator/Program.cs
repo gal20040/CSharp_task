@@ -15,7 +15,7 @@ namespace ConsoleCalculator
             else
                 input = "3+1";
 
-            var calc = new Calculator();
+            var calc = new MathOperationsHelper();
 
             Console.WriteLine(calc.Sum(1, 10));
             Console.WriteLine(calc.Sum(1, -10));
