@@ -18,11 +18,44 @@ namespace ConsoleCalculator.Tests.Tests
         }
 
         [TestMethod]
-        public void Evaluate_9dot36Expected()
+        public void Evaluate_8dot36Expected()
         {
-            const double expected = 9.36;
+            const double expected = 8.36;
 
-            const string input = "2.1asd   +2.2*sd3.3ddd";
+            const string input = "1.1asd   +2.2*sd3.3ddd";
+            var actual = Evaluate(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Evaluate_10dot89Expected()
+        {
+            const double expected = 10.89;
+
+            const string input = "(1.1asd   +2.2c)x*sd3.3ddd";
+            var actual = Evaluate(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Evaluate_111111111Expected()
+        {
+            const double expected = 111111111;
+
+            const string input = "12345679*9";
+            var actual = Evaluate(input);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Evaluate_1111111101Expected()
+        {
+            const double expected = 1111111101;
+
+            const string input = "123456789*9";
             var actual = Evaluate(input);
 
             Assert.AreEqual(expected, actual);
