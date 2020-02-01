@@ -52,7 +52,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = EnqueueToRpnQueueAndGoToNextToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = EnqueueToRpnQueueAndGoToNextToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = EnqueueToRpnQueueAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = InterruptDueToErrorInInputEquation;
             }
 
             currToken = TokenTypes.Stopper; //текущий токен из Queue<Token> tokens
@@ -64,7 +63,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = InterruptDueToErrorInInputEquation;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = InterruptDueToErrorInInputEquation;
             }
 
             currToken = TokenTypes.Plus; //текущий токен из Queue<Token> tokens
@@ -75,7 +73,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = PushToOperationsStackAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = ;
             }
 
             currToken = TokenTypes.Minus; //текущий токен из Queue<Token> tokens
@@ -86,7 +83,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = PushToOperationsStackAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = ;
             }
 
             currToken = TokenTypes.Multiplication; //текущий токен из Queue<Token> tokens
@@ -97,7 +93,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = PushToOperationsStackAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = ;
             }
 
             currToken = TokenTypes.Division; //текущий токен из Queue<Token> tokens
@@ -108,7 +103,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = PushToOperationsStackAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = ;
             }
 
             currToken = TokenTypes.OpeningBracket; //текущий токен из Queue<Token> tokens
@@ -119,7 +113,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = PushToOperationsStackAndGoToNextToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = PushToOperationsStackAndGoToNextToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = PushToOperationsStackAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = ;
             }
 
             currToken = TokenTypes.ClosingBracket; //текущий токен из Queue<Token> tokens
@@ -130,7 +123,6 @@ namespace ConsoleCalculator.PolishNotations
                 inputTokenActions[(currToken, TokenTypes.Multiplication)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.Division)] = MoveFromOperationsStackToRpnQueueAndStayAtCurrToken;
                 inputTokenActions[(currToken, TokenTypes.OpeningBracket)] = PopFromOperationsStackAndAndGoToNextToken;
-                //inputTokenActions[(currToken, TokenTypes.ClosingBracket)] = ;
             }
         }
 
