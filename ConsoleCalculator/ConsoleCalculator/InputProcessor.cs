@@ -5,9 +5,6 @@ namespace ConsoleCalculator
 {
     public class InputProcessor
     {
-        private const char fractionSeparator = '.';
-        private const string commaSeparator = ",";
-
         public Queue<Token> GetTokens(string input)
         {
             var tokens = new Queue<Token>();
@@ -29,22 +26,22 @@ namespace ConsoleCalculator
             //начальный стоппер
             tokens.Enqueue(Token.GetStopperToken());
 
-            var number = string.Empty;
+            var tempNumber = string.Empty;
             for (int i = 0; i < input.Length; i++)
             {
                 var symbol = input[i];
                 if (IsNumericPart(symbol))
                 {
                     //текущий символ - цифра или точка
-                    number += symbol; //прицепим его к строковому представлению number для дальнейшего парсинга в числовое представление
+                    tempNumber += symbol; //прицепим его к строковому представлению number для дальнейшего парсинга в числовое представление
                 }
                 else
                 {
-                    if (!string.IsNullOrWhiteSpace(number))
+                    //строковое представление number не пустое
+                    if (!string.IsNullOrWhiteSpace(tempNumber))
                     {
-                        //строковое представление number не нулевое
-                        tokens.Enqueue(new Token(double.Parse(number)));
-                        number = string.Empty;
+                        tokens.Enqueue(new Token(double.Parse(tempNumber)));
+                        tempNumber = string.Empty;
                     }
 
                     if (IsOperatorOrBracket(symbol))
@@ -52,6 +49,13 @@ namespace ConsoleCalculator
                         tokens.Enqueue(new Token(symbol));
                     }
                 }
+            }
+
+            //строковое представление number не пустое
+            if (!string.IsNullOrWhiteSpace(tempNumber))
+            {
+                tokens.Enqueue(new Token(double.Parse(tempNumber)));
+                tempNumber = string.Empty;
             }
 
             //конечный стоппер
@@ -111,7 +115,7 @@ namespace ConsoleCalculator
 
         public string PropagateFractionSeparator(string input)
         {
-            return input.Replace(commaSeparator, fractionSeparator.ToString());
+            return input.Replace(Settings.dotSeparator, Settings.fractionSeparator.ToString());
         }
 
         /// <summary>
@@ -122,8 +126,8 @@ namespace ConsoleCalculator
         /// <returns></returns>
         public bool DoesContainDotsAndCommas(string input)
         {
-            if (input.Contains(fractionSeparator.ToString()) && input.Contains(commaSeparator))
-                throw new Exception($"Входная строка содержит и '{fractionSeparator}', и '{commaSeparator}' - оставьте либо одно, либо другое.");
+            if (input.Contains(Settings.fractionSeparator.ToString()) && input.Contains(Settings.dotSeparator))
+                throw new Exception($"Входная строка содержит и '{Settings.fractionSeparator}', и '{Settings.dotSeparator}' - оставьте либо одно, либо другое.");
 
             return false;
         }
@@ -135,7 +139,7 @@ namespace ConsoleCalculator
         /// <returns>Результат проверки</returns>
         public bool IsNumericPart(char @char)
         {
-            return char.IsDigit(@char) || @char == fractionSeparator;
+            return char.IsDigit(@char) || @char == Settings.fractionSeparator;
         }
 
         /// <summary>

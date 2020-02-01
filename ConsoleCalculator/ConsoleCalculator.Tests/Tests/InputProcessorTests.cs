@@ -49,7 +49,7 @@ namespace ConsoleCalculator.Tests.Tests
         public void PropagateFractionSeparator_0bs1dot2comma3_0bs1dot2dot3expected()
         {
             const string input = "0 1.2,3";
-            var expected = "0 1.2.3";
+            var expected = "0 1,2,3";
 
             var processor = new InputProcessor();
             var actual = processor.PropagateFractionSeparator(input);
@@ -94,11 +94,11 @@ namespace ConsoleCalculator.Tests.Tests
 
         #region IsNumericPart
         [TestMethod]
-        public void IsNumericPart_From0To9AndDot_TrueExpected()
+        public void IsNumericPart_From0To9AndComma_TrueExpected()
         {
             var processor = new InputProcessor();
 
-            const string dotAndDigits = ".0123456789";
+            const string dotAndDigits = ",0123456789";
 
             foreach (var @char in dotAndDigits)
             {
@@ -114,7 +114,7 @@ namespace ConsoleCalculator.Tests.Tests
             for (char @char = (char)32; @char <= (char)127; @char++)
             {
                 if ((@char >= '0' && @char <= '9')
-                    || @char == '.')
+                    || @char == Settings.fractionSeparator)
                 {
                     continue;
                 }
