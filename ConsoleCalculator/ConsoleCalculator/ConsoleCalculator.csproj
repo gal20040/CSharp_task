@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Calculator.cs" />
     <Compile Include="InputProcessor.cs" />
-    <Compile Include="PolishNotations\PolishNotaionHelper.cs" />
+    <Compile Include="PolishNotations\PolishNotationHelper.cs" />
     <Compile Include="PolishNotations\PolishNotation.cs" />
     <Compile Include="PolishNotations\ReversedPolishNotation.cs" />
     <Compile Include="Program.cs" />

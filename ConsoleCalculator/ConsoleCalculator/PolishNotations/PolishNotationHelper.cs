@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ConsoleCalculator.PolishNotations
 {
-    public class PolishNotaionHelper
+    public class PolishNotationHelper
     {
         /// <summary>Обратная польская нотация</summary>
         private PolishNotation reversedPolishNotation;

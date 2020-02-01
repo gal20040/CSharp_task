@@ -26,7 +26,7 @@ namespace ConsoleCalculator.Tests.Tests
             var inputProcessor = new InputProcessor();
             Queue<Token> inputTokens = inputProcessor.GetTokens(input); //лень вручную наполнять очередь с токенами, поэтому использую InputProcessor
 
-            var polishNotaionHelper = new PolishNotaionHelper();
+            var polishNotaionHelper = new PolishNotationHelper();
             var actual = polishNotaionHelper.GetReversedPolishNotation(inputTokens);
 
             Assert.AreEqual(expected.GetType(), actual.GetType());
