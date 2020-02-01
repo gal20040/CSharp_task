@@ -48,6 +48,7 @@
     <Compile Include="PolishNotations\PolishNotationHelper.cs" />
     <Compile Include="PolishNotations\PolishNotation.cs" />
     <Compile Include="PolishNotations\ReversedPolishNotation.cs" />
+    <Compile Include="PolishNotations\RPNEvaluationHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />

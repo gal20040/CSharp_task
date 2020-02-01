@@ -1,34 +1,31 @@
-﻿using System;
+﻿using ConsoleCalculator.PolishNotations;
+using System;
 
 namespace ConsoleCalculator
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            string input = "";
+            string input = "0 + 9AsD1  23 -  4 *(5/6)";
             if (args.Length > 0)
+            {
                 foreach (var arg in args)
                 {
                     input += arg;
                 }
-            else
-                input = "3+1";
+            }
 
-            var calc = new MathOperationsHelper();
+            var inputProcessor = new InputProcessor();
+            var tokens = inputProcessor.GetTokens(input);
 
-            Console.WriteLine(calc.Sum(1, 10));
-            Console.WriteLine(calc.Sum(1, -10));
-            Console.WriteLine(calc.Divide(1, 10));
-            Console.WriteLine(calc.Multiply(2, 10));
-            Console.WriteLine(calc.Subtract(1, 10));
+            var polishNotationsHelper = new PolishNotationHelper();
+            var reversedPolishNotation = polishNotationsHelper.GetReversedPolishNotation(tokens) as ReversedPolishNotation;
 
+            var rpnEvaluationHelper = new RPNEvaluationHelper();
+            double result = rpnEvaluationHelper.Evaluate(reversedPolishNotation);
 
-
-            Console.WriteLine(input);
-            Console.WriteLine(args.Length);
-
-            Console.ReadLine();
+            Console.WriteLine(result);
         }
     }
 }
