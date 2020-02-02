@@ -152,9 +152,44 @@ namespace ArtList
         /// </summary>
         /// <param name="item">The object to remove from the <see cref="ArtList"/>&lt;<see cref="T"/>&gt;. The value can be null for reference types.</param>
         /// <returns>true if item is successfully removed; otherwise, false. This method also returns false if item was not found in the <see cref="ArtList"/>&lt;<see cref="T"/>&gt;.</returns>
+        /// <exception cref="Exception">
+        /// After removing the <paramref name="item"/>, the new array capacity/count unexpectedly changed/increased compared to the initial
+        /// </exception>
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            int numIndex = Array.IndexOf(_artList, item);
+            if (numIndex <= -1)
+            {
+                //returns false if item was not found
+                return false;
+            }
+
+            var oldCapacity = Capacity;
+            var oldCount = Count;
+            RemoveAt(numIndex);
+
+            var exceptionMessageTemplate = $"After removing the item {item.ToString()}, the new array %0 unexpectedly %1 compared to the initial";
+
+            var capacityResult = oldCapacity.CompareTo(Capacity); //compare previous and new Capacities
+            if (capacityResult != 0) //capacity should remain the same
+            {
+                //throw exception if new array capacity is greater than old one - smthng went wrong
+                throw new Exception(string.Format(exceptionMessageTemplate, "capacity", "changed") +
+                                $"\n\tinitial array capacity={oldCapacity}" +
+                                $"\n\tnew array capacity={Capacity}");
+            }
+
+            var countResult = oldCount.CompareTo(Count); //compare previous and new Counts
+            if (countResult == -1) //count may stay the same or decrease
+            {
+                //throw exception if new array count is greater than old one - smthng went wrong
+                throw new Exception(string.Format(exceptionMessageTemplate, "count", "increased") +
+                                $"\n\tinitial array count={oldCount}" +
+                                $"\n\tnew array count={Count}");
+            }
+
+            //true if item is successfully removed; otherwise, false
+            return countResult == 1;
         }
 
         /// <summary>
