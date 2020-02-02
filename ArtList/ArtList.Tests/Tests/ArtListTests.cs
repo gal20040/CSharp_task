@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace ArtList.Tests
+namespace ArtList.Tests.Tests
 {
     [TestClass]
-    public class ArtListTests
+    public class ArtListTests : BaseForTests
     {
         [TestMethod]
         public void Count_EmptyList()
@@ -81,12 +81,8 @@ namespace ArtList.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ArtList_RemoveAt_Minus1Index()
         {
-            var artList = new ArtList<int>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                artList.Add(i);
-            }
+            const byte count = 5;
+            PrepareListAndArtList(out _, out ArtList<int> artList, count);
 
             artList.RemoveAt(-1);
         }
@@ -95,12 +91,8 @@ namespace ArtList.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void List_RemoveAt_Minus1Index()
         {
-            var list = new List<int>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                list.Add(i);
-            }
+            const byte count = 5;
+            PrepareListAndArtList(out List<int> list, out _, count);
 
             list.RemoveAt(-1);
         }
@@ -109,12 +101,8 @@ namespace ArtList.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ArtList_RemoveAt_CountIndex()
         {
-            var artList = new ArtList<int>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                artList.Add(i);
-            }
+            const byte count = 5;
+            PrepareListAndArtList(out _, out ArtList<int> artList, count);
 
             artList.RemoveAt(artList.Count);
         }
@@ -123,12 +111,8 @@ namespace ArtList.Tests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void List_RemoveAt_CountIndex()
         {
-            var list = new List<int>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                list.Add(i);
-            }
+            const byte count = 5;
+            PrepareListAndArtList(out List<int> list, out _, count);
 
             list.RemoveAt(list.Count);
         }
@@ -136,12 +120,8 @@ namespace ArtList.Tests
         [TestMethod]
         public void ArtList_RemoveAt_CountMinus1Index()
         {
-            var artList = new ArtList<int>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                artList.Add(i);
-            }
+            const byte count = 5;
+            PrepareListAndArtList(out _, out ArtList<int> artList, count);
 
             var expected = artList.Count - 1;
 
@@ -155,12 +135,8 @@ namespace ArtList.Tests
         [TestMethod]
         public void List_RemoveAt_CountMinus1Index()
         {
-            var list = new List<int>();
-
-            for (int i = 0; i < 5; i++)
-            {
-                list.Add(i);
-            }
+            const byte count = 5;
+            PrepareListAndArtList(out List<int> list, out _, count);
 
             var expected = list.Count - 1;
 
@@ -204,19 +180,12 @@ namespace ArtList.Tests
         [TestMethod]
         public void Remove_ItemsThatMultiplesTen()
         {
-            var artList = new ArtList<int>();
-            var list = new List<int>();
+            const byte count = 100;
+            PrepareListAndArtList(out List<int> list, out ArtList<int> artList, count);
 
             var listsComparer = new ListsComparer();
             bool result;
             string comparisonResult;
-
-            //adding
-            for (int i = 0; i < 100; i++)
-            {
-                artList.Add(i);
-                list.Add(i);
-            }
 
             //precheck
             result = listsComparer.IsEqual(list, artList, out comparisonResult);
