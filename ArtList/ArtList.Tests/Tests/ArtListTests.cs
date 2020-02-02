@@ -201,5 +201,29 @@ namespace ArtList.Tests.Tests
             }
         }
         #endregion
+
+        #region IndexOf
+        [TestMethod]
+        public void IndexOf_ItemsThatMultiplesTen()
+        {
+            const byte count = 100;
+            PrepareListAndArtList(out List<int> list, out ArtList<int> artList, count);
+
+            //precheck
+            var listsComparer = new ListsComparer();
+            bool result = listsComparer.IsEqual(list, artList, out var comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
+
+            int expected, actual;
+
+            //get numbers from -20 to 110 inclusive, which are multiples of 10
+            for (int number = -20; number <= 110; number += 10)
+            {
+                expected = artList.IndexOf(number);
+                actual = list.IndexOf(number);
+                Assert.AreEqual(expected, actual);
+            }
+        }
+        #endregion
     }
 }
