@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using ArtList.Tests.Helpers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace ArtList.Tests
 {
@@ -6,34 +8,45 @@ namespace ArtList.Tests
     public class ArtListTests
     {
         [TestMethod]
-        public void ArtList_Count()
+        public void ArtList_EmptyArtListCount()
         {
-            const int expected = 0;
-            var list = new ArtList<int>();
+            var artList = new ArtList<int>();
+            var list = new List<int>();
 
-            var actual = list.Count;
-            Assert.AreEqual(expected, actual);
+            var listsComparer = new ListsComparer();
+            var isEqual = listsComparer.IsEqual(list, artList, out var comparisonResult);
+            Assert.IsTrue(isEqual, comparisonResult);
         }
 
         [TestMethod]
-        public void ArtList_Add()
+        public void ArtList_Add100ItemsToArtListAndCount()
         {
-            var expected = 0;
-            var list = new ArtList<int>();
+            var artList = new ArtList<int>();
+            var list = new List<int>();
 
-            var actual = list.Count;
-            Assert.AreEqual(expected, actual);
+            var listsComparer = new ListsComparer();
+            var result = listsComparer.IsEqual(list, artList, out var comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
 
+            for (int i = 0; i < 100; i++)
+            {
+                artList.Add(i);
+                list.Add(i);
+                result = listsComparer.IsEqual(list, artList, out comparisonResult);
+                Assert.IsTrue(result, comparisonResult);
+            }
 
-            list.Add(1);
-            expected = 1;
-            actual = list.Count;
-            Assert.AreEqual(expected, actual);
+            var j = 10;
+            artList[j] += j;
+            list[j] += j;
+            result = listsComparer.IsEqual(list, artList, out comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
 
-            list.Add(2);
-            expected = 2;
-            actual = list.Count;
-            Assert.AreEqual(expected, actual);
+            j = 20;
+            artList[j] += j;
+            list[j] += j;
+            result = listsComparer.IsEqual(list, artList, out comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
         }
     }
 }
