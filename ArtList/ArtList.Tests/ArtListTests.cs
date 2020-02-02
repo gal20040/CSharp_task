@@ -199,5 +199,38 @@ namespace ArtList.Tests
             Assert.AreEqual(expected, actual);
         }
         #endregion RemoveAt
+
+        #region Remove
+        [TestMethod]
+        public void Remove_ItemsThatMultiplesTen()
+        {
+            var artList = new ArtList<int>();
+            var list = new List<int>();
+
+            var listsComparer = new ListsComparer();
+            bool result;
+            string comparisonResult;
+
+            //adding
+            for (int i = 0; i < 100; i++)
+            {
+                artList.Add(i);
+                list.Add(i);
+            }
+
+            //precheck
+            result = listsComparer.IsEqual(list, artList, out comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
+
+            //get numbers from -10 to 100 inclusive, which are multiples of 10
+            for (int number = -10; number <= 100; number += 10)
+            {
+                artList.Remove(number);
+                list.Remove(number);
+                result = listsComparer.IsEqual(list, artList, out comparisonResult);
+                Assert.IsTrue(result, comparisonResult);
+            }
+        }
+        #endregion
     }
 }
