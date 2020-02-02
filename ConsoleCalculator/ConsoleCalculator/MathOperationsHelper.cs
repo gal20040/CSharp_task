@@ -23,7 +23,9 @@ namespace ConsoleCalculator
         public double Divide(double x, double y)
         {
             if (y == 0)
+            {
                 throw new DivideByZeroException("Знаменатель не должен быть равен 0.");
+            }
 
             return (double)x / y;
         }

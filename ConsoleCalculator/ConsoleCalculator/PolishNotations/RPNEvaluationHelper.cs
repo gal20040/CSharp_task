@@ -49,7 +49,7 @@ namespace ConsoleCalculator.PolishNotations
                         throw new Exception($"Неожидаемое значение {nameof(TokenTypes)}: {token.TokenType}");
 
                     default:
-                        throw new Exception($"Неизвестное значение {nameof(TokenTypes)}: {token.TokenType}");
+                        throw new Exception(string.Format(Settings.UnknownValueTemplate, nameof(TokenTypes), token.TokenType));
                 }
             }
 
@@ -63,7 +63,7 @@ namespace ConsoleCalculator.PolishNotations
             //в конце обработки в стеке должно остаться только одно число
             if (numbersStack.Count != 1)
             {
-                throw new Exception($"Входное выражение некорретно.");
+                throw new Exception($"В конце вычисления в {numbersStack} должно остаться 1 число - результат вычисления, текущее кол-во элементов: {numbersStack.Count}.");
             }
         }
 
@@ -77,7 +77,7 @@ namespace ConsoleCalculator.PolishNotations
 
             if (numbersStack.Count == 0)
             {
-                throw new Exception($"Структура {nameof(numbersStack)} пуста, нечего возвращать.");
+                throw new Exception(string.Format(Settings.NoItemsTemplate, nameof(numbersStack)));
             }
             #endregion
 
@@ -93,12 +93,12 @@ namespace ConsoleCalculator.PolishNotations
 
             if (reversedPolishNotation.Tokens == null)
             {
-                throw new Exception($"В {nameof(reversedPolishNotation)} не инициализирован {nameof(reversedPolishNotation.Tokens)}");
+                throw new ArgumentNullException(nameof(reversedPolishNotation.Tokens));
             }
 
             if (reversedPolishNotation.Tokens.Count == 0)
             {
-                throw new Exception($"Структура {nameof(reversedPolishNotation.Tokens)} в {nameof(reversedPolishNotation)} пуста.");
+                throw new Exception(string.Format(Settings.NoItemsTemplate, nameof(reversedPolishNotation.Tokens)));
             }
         }
 

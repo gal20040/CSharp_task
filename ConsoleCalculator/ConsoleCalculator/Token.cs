@@ -46,7 +46,7 @@ namespace ConsoleCalculator
                     break;
 
                 default:
-                    throw new Exception($"Unexpected {nameof(TokenTypes)} value: {oper}.");
+                    throw new Exception(string.Format(Settings.UnknownValueTemplate, nameof(TokenTypes), oper));
             }
         }
         #endregion

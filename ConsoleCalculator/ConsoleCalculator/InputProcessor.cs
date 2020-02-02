@@ -127,7 +127,10 @@ namespace ConsoleCalculator
         public bool DoesContainDotsAndCommas(string input)
         {
             if (input.Contains(Settings.fractionSeparator.ToString()) && input.Contains(Settings.dotSeparator))
-                throw new Exception($"Входная строка содержит и '{Settings.fractionSeparator}', и '{Settings.dotSeparator}' - оставьте либо одно, либо другое.");
+            {
+                Console.WriteLine($"Входная строка содержит и '{Settings.fractionSeparator}', и '{Settings.dotSeparator}' - оставьте либо одно, либо другое.");
+                throw new Exception();
+            }
 
             return false;
         }

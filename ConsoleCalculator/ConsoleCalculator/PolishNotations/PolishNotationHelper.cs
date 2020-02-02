@@ -147,7 +147,7 @@ namespace ConsoleCalculator.PolishNotations
             }
             else
             {
-                throw new ArgumentException("Неизвестный тип задания");
+                throw new KeyNotFoundException($"Неопределённое действие для {tokenTuple.Item1} и {tokenTuple.Item2}.");
             }
         }
 
@@ -182,8 +182,7 @@ namespace ConsoleCalculator.PolishNotations
 
         private void InterruptDueToErrorInInputEquation()
         {
-            var inputProcessor = new InputProcessor();
-            throw new Exception($"Некорретное входное выражение: {inputProcessor.TokensToString(tokens)}");
+            throw new Exception();
         }
 
         /// <summary>
@@ -205,7 +204,7 @@ namespace ConsoleCalculator.PolishNotations
             }
             if (tokens.Count == 0)
             {
-                throw new Exception($"{nameof(tokens)} has 0 items.");
+                throw new Exception(string.Format(Settings.NoItemsTemplate, nameof(tokens)));
             }
 
             reversedPolishNotation = new ReversedPolishNotation();
