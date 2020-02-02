@@ -9,7 +9,7 @@ namespace ArtList.Tests
     public class ArtListTests
     {
         [TestMethod]
-        public void ArtList_EmptyArtListCount()
+        public void Count_EmptyList()
         {
             var artList = new ArtList<int>();
             var list = new List<int>();
@@ -21,7 +21,7 @@ namespace ArtList.Tests
 
         #region Add
         [TestMethod]
-        public void ArtList_Add100ItemsToArtListAndCount()
+        public void Add_100Items()
         {
             var artList = new ArtList<int>();
             var list = new List<int>();
@@ -50,9 +50,11 @@ namespace ArtList.Tests
             result = listsComparer.IsEqual(list, artList, out comparisonResult);
             Assert.IsTrue(result, comparisonResult);
         }
+        #endregion
 
+        #region RemoveAt
         [TestMethod]
-        public void ArtList_Add100ItemsRemoveAtAndCount()
+        public void RemoveAt_AllIndexesThatMultiplesTen()
         {
             var artList = new ArtList<int>();
             var list = new List<int>();
@@ -74,12 +76,10 @@ namespace ArtList.Tests
                 Assert.IsTrue(result, comparisonResult);
             }
         }
-        #endregion
 
-        #region RemoveAt
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ArtList_RemoveAtMinus1Index()
+        public void ArtList_RemoveAt_Minus1Index()
         {
             var artList = new ArtList<int>();
 
@@ -93,7 +93,7 @@ namespace ArtList.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void List_RemoveAtMinus1Index()
+        public void List_RemoveAt_Minus1Index()
         {
             var list = new List<int>();
 
@@ -107,7 +107,7 @@ namespace ArtList.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ArtList_RemoveAtCountIndex()
+        public void ArtList_RemoveAt_CountIndex()
         {
             var artList = new ArtList<int>();
 
@@ -121,7 +121,7 @@ namespace ArtList.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void List_RemoveAtCountIndex()
+        public void List_RemoveAt_CountIndex()
         {
             var list = new List<int>();
 
@@ -134,7 +134,7 @@ namespace ArtList.Tests
         }
 
         [TestMethod]
-        public void ArtList_RemoveAtCountMinus1Index()
+        public void ArtList_RemoveAt_CountMinus1Index()
         {
             var artList = new ArtList<int>();
 
@@ -153,7 +153,7 @@ namespace ArtList.Tests
         }
 
         [TestMethod]
-        public void List_RemoveAtCountMinus1Index()
+        public void List_RemoveAt_CountMinus1Index()
         {
             var list = new List<int>();
 
@@ -172,7 +172,7 @@ namespace ArtList.Tests
         }
 
         [TestMethod]
-        public void ArtList_RemoveAtZeroIndex()
+        public void ArtList_RemoveAt_ZeroIndex()
         {
             var artList = new ArtList<int> { 1 };
 
@@ -186,7 +186,7 @@ namespace ArtList.Tests
         }
 
         [TestMethod]
-        public void List_RemoveAtZeroIndex()
+        public void List_RemoveAt_ZeroIndex()
         {
             var list = new List<int> { 1 };
 
