@@ -18,17 +18,6 @@ namespace ConsoleCalculator.Tests.Tests
         }
 
         [TestMethod]
-        public void Evaluate_Expected()
-        {
-            const double expected = 8.36;
-
-            const string input = "1.1asd   +2,2*sd3.3ddd";
-            var actual = Evaluate(input);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
         public void Evaluate_8dot36Expected()
         {
             const double expected = 8.36;
