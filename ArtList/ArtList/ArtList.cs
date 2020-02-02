@@ -130,7 +130,7 @@ namespace ArtList
         /// <returns>The zero-based index of the first occurrence of item within the entire <see cref="ArtList"/>&lt;<see cref="T"/>&gt;, if found; otherwise, –1.</returns>
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            return Array.IndexOf(_artList, item);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace ArtList
         /// </exception>
         public bool Remove(T item)
         {
-            int numIndex = Array.IndexOf(_artList, item);
+            int numIndex = IndexOf(item);
             if (numIndex <= -1)
             {
                 //returns false if item was not found
