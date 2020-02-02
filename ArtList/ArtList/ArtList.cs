@@ -167,7 +167,7 @@ namespace ArtList
         public void RemoveAt(int index)
         {
             if (index < 0
-                || index >= Capacity)
+                || index >= Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
