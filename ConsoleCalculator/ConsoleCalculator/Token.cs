@@ -6,7 +6,7 @@ namespace ConsoleCalculator
     {
         public TokenTypes TokenType { get; private set; }
 
-        public double Number { get; private set; }
+        public double Number { get; }
 
         #region ctor
         private Token() {}
@@ -53,8 +53,10 @@ namespace ConsoleCalculator
 
         public static Token GetStopperToken()
         {
-            var token = new Token();
-            token.TokenType = TokenTypes.Stopper;
+            var token = new Token
+            {
+                TokenType = TokenTypes.Stopper
+            };
 
             return token;
         }

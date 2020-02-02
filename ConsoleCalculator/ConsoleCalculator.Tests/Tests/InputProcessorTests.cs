@@ -12,7 +12,7 @@ namespace ConsoleCalculator.Tests.Tests
         public void CleanUpInput_0bsPlusBs9AsD1bsBs23bsMinusBsBs4bsMultiplyOpenBracket5Division6CloseBracket_0Plus9123Minus4MultyOpBr5Div6ClBrExpected()
         {
             const string input = "0 + 9AsD1  23 -  4 *(5/6)";
-            var expected = "0+9123-4*(5/6)";
+            const string expected = "0+9123-4*(5/6)";
 
             var processor = new InputProcessor();
             var actual = processor.CleanUpInput(input);
@@ -24,7 +24,7 @@ namespace ConsoleCalculator.Tests.Tests
         public void CleanUpInput_0bsbsbs_0expected()
         {
             const string input = "0   ";
-            var expected = "0";
+            const string expected = "0";
 
             var processor = new InputProcessor();
             var actual = processor.CleanUpInput(input);
@@ -36,7 +36,7 @@ namespace ConsoleCalculator.Tests.Tests
         public void CleanUpInput_bsbs0_0expected()
         {
             const string input = "  0";
-            var expected = "0";
+            const string expected = "0";
 
             var processor = new InputProcessor();
             var actual = processor.CleanUpInput(input);
@@ -49,7 +49,7 @@ namespace ConsoleCalculator.Tests.Tests
         public void PropagateFractionSeparator_0bs1dot2comma3_0bs1dot2dot3expected()
         {
             const string input = "0 1.2,3";
-            var expected = "0 1,2,3";
+            const string expected = "0 1,2,3";
 
             var processor = new InputProcessor();
             var actual = processor.PropagateFractionSeparator(input);
@@ -87,8 +87,7 @@ namespace ConsoleCalculator.Tests.Tests
             const string input = "0.1+0,2";
 
             var processor = new InputProcessor();
-
-            var actual = processor.DoesContainDotsAndCommas(input);
+            _ = processor.DoesContainDotsAndCommas(input);
         }
         #endregion
 
@@ -142,7 +141,6 @@ namespace ConsoleCalculator.Tests.Tests
         {
             var processor = new InputProcessor();
             const string operatorsAndBrackets = "+-*/()";
-
 
             for (char @char = (char)32; @char <= (char)127; @char++)
             {
@@ -201,7 +199,7 @@ namespace ConsoleCalculator.Tests.Tests
             var processor = new InputProcessor();
 
             const string input = "0 + 9AsD1  23 -  4 *(5/6)";
-            var expected = "0+9123-4*(5/6)";
+            const string expected = "0+9123-4*(5/6)";
 
             var actual = processor.TokensToString(input);
 

@@ -41,8 +41,8 @@ namespace ConsoleCalculator.Tests.Tests
                 //Assert.AreEqual(exp, act); //'Сбой Assert.AreEqual. Ожидается: <ConsoleCalculator.Token>. Фактически: <ConsoleCalculator.Token>. '
 
                 const byte zero = 0;
-                Assert.AreEqual(exp.CompareTo(act), zero, $"\nexpected: {exp.ToString()}" +
-                                                          $"\nactual:   {act.ToString()}");
+                Assert.AreEqual(exp.CompareTo(act), zero, $"\nexpected: {exp}" +
+                                                          $"\nactual:   {act}");
             }
         }
     }

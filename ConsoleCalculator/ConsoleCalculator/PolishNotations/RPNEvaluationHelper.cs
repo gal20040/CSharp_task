@@ -5,13 +5,14 @@ namespace ConsoleCalculator.PolishNotations
 {
     public class RPNEvaluationHelper
     {
-        private Stack<double> numbersStack = new Stack<double>();
+        private readonly Stack<double> numbersStack = new Stack<double>();
 
-        private MathOperationsHelper mathOperationsHelper = new MathOperationsHelper();
+        private readonly MathOperationsHelper mathOperationsHelper = new MathOperationsHelper();
 
         public double Evaluate(ReversedPolishNotation reversedPolishNotation)
         {
             CheckArgument(reversedPolishNotation);
+            DetermineMathActions();
 
             var tokens = reversedPolishNotation.Tokens;
             Token token;
@@ -27,19 +28,10 @@ namespace ConsoleCalculator.PolishNotations
                         continue;
 
                     case TokenTypes.Plus:
-                        PerformSum();
-                        break;
-
                     case TokenTypes.Minus:
-                        PerformSubtraction();
-                        break;
-
                     case TokenTypes.Multiplication:
-                        PerformMultiplication();
-                        break;
-
                     case TokenTypes.Division:
-                        PerformDivision();
+                        mathActions[token.TokenType]();
                         break;
 
                     case TokenTypes.OpeningBracket:
@@ -53,12 +45,12 @@ namespace ConsoleCalculator.PolishNotations
                 }
             }
 
-            PerformFinalCheck(reversedPolishNotation);
+            PerformFinalCheck();
 
             return numbersStack.Pop();
         }
 
-        private void PerformFinalCheck(ReversedPolishNotation reversedPolishNotation)
+        private void PerformFinalCheck()
         {
             //в конце обработки в стеке должно остаться только одно число
             if (numbersStack.Count != 1)

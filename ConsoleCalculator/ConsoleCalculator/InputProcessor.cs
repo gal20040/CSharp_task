@@ -55,7 +55,6 @@ namespace ConsoleCalculator
             if (!string.IsNullOrWhiteSpace(tempNumber))
             {
                 tokens.Enqueue(new Token(double.Parse(tempNumber)));
-                tempNumber = string.Empty;
             }
 
             //конечный стоппер
