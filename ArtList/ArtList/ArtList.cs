@@ -33,8 +33,8 @@ namespace ArtList
         {
             get
             {
-                if (index < 0
-                    || index >= Count)
+                var isIndexOk = index >= 0 && index < Count;
+                if (!isIndexOk)
                 {
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
@@ -143,7 +143,8 @@ namespace ArtList
         /// </exception>
         public void Insert(int index, T item)
         {
-            if (index < 0 || index > Count)
+            var isIndexOk = index >= 0 && index <= Count;
+            if (!isIndexOk)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
@@ -213,7 +214,8 @@ namespace ArtList
         /// </exception>
         public void RemoveAt(int index)
         {
-            if (index < 0 || index >= Count)
+            var isIndexOk = index >= 0 && index < Count;
+            if (!isIndexOk)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
