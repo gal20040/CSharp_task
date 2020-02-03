@@ -138,13 +138,25 @@ namespace ArtList
         /// </summary>
         /// <param name="index">The zero-based index at which item should be inserted.</param>
         /// <param name="item">The object to insert. The value can be null for reference types.</param>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="index"/> is less than 0.-or- <paramref name="index"/> is greater than <see cref="ArtList"/>&lt;<see cref="T"/>&gt;.Count
+        /// </exception>
         public void Insert(int index, T item)
         {
-            // Exceptions:
-            //   T:System.ArgumentOutOfRangeException:
-            //     index is less than 0.-or- index is greater than <see cref="ArtList"/>&lt;<see cref="T"/>&gt;.Count.
+            if (index < 0 || index > Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
 
-            throw new NotImplementedException();
+            CheckCapacity();
+
+            var newArray = new T[Capacity];
+            Array.Copy(_artList, 0, newArray, 0, index);
+            newArray[index] = item;
+            Array.Copy(_artList, index, newArray, index + 1, Count - index);
+
+            _artList = newArray;
+            _lastAssignedIndex++;
         }
 
         /// <summary>
@@ -201,8 +213,7 @@ namespace ArtList
         /// </exception>
         public void RemoveAt(int index)
         {
-            if (index < 0
-                || index >= Count)
+            if (index < 0 || index >= Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }

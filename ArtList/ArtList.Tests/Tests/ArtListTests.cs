@@ -225,5 +225,125 @@ namespace ArtList.Tests.Tests
             }
         }
         #endregion
+
+        #region Insert
+        [TestMethod]
+        public void Insert_ItemsWithIncreasingCapacity()
+        {
+            const byte count = 14;
+            PrepareListAndArtList(out List<int> list, out ArtList<int> artList, count);
+
+            //precheck
+            var listsComparer = new ListsComparer();
+            bool result = listsComparer.IsEqual(list, artList, out var comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
+
+            int index, value;
+
+            for (int i = 0; i < 5; i++)
+            {
+                index = (i + 1) * 2;
+                value = index * 100;
+                artList.Insert(index, value);
+                list.Insert(index, value);
+
+                result = listsComparer.IsEqual(list, artList, out comparisonResult);
+                Assert.IsTrue(result, comparisonResult);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ArtList_Insert_AtMinus1Index()
+        {
+            const byte count = 0;
+            PrepareListAndArtList(out _, out ArtList<int> artList, count);
+
+            const int index = -1;
+            const int value = 100;
+            artList.Insert(index, value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void List_Insert_AtMinus1Index()
+        {
+            const byte count = 0;
+            PrepareListAndArtList(out List<int> list, out _, count);
+
+            const int index = -1;
+            const int value = 100;
+            list.Insert(index, value);
+        }
+
+        [TestMethod]
+        public void Insert_ItemsAtZeroIndex()
+        {
+            const byte count = 0;
+            PrepareListAndArtList(out List<int> list, out ArtList<int> artList, count);
+
+            //precheck
+            var listsComparer = new ListsComparer();
+            bool result = listsComparer.IsEqual(list, artList, out var comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
+
+            const int index = 0;
+            const int value = 100;
+            artList.Insert(index, value);
+            list.Insert(index, value);
+
+            result = listsComparer.IsEqual(list, artList, out comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ArtList_Insert_AtCountPlus1Index()
+        {
+            const byte count = 5;
+            PrepareListAndArtList(out _, out ArtList<int> artList, count);
+
+            var index = artList.Count + 1;
+            const int value = 100;
+            artList.Insert(index, value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void List_Insert_AtCountPlus1Index()
+        {
+            const byte count = 5;
+            PrepareListAndArtList(out List<int> list, out _, count);
+
+            var index = list.Count + 1;
+            const int value = 100;
+            list.Insert(index, value);
+        }
+
+        [TestMethod]
+        public void Insert_ItemsAtCountIndex()
+        {
+            const byte count = 5;
+            PrepareListAndArtList(out List<int> list, out ArtList<int> artList, count);
+
+            //precheck
+            var listsComparer = new ListsComparer();
+            bool result = listsComparer.IsEqual(list, artList, out var comparisonResult);
+            Assert.IsTrue(result, comparisonResult);
+
+            int index, value;
+
+            for (int i = 0; i < 3; i++)
+            {
+                index = artList.Count;
+                value = index * 100;
+                artList.Insert(index, value);
+                list.Insert(index, value);
+
+                result = listsComparer.IsEqual(list, artList, out comparisonResult);
+                Assert.IsTrue(result, comparisonResult);
+            }
+        }
+        #endregion
     }
 }
