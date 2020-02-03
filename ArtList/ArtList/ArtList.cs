@@ -46,7 +46,41 @@ namespace ArtList
 
         public int Count => _itemIndexToAssign;
 
-        public int Capacity => _artList.Length;
+        /// <summary>
+        /// Gets or sets the total number of elements the internal data structure can hold without resizing.
+        /// </summary>
+        /// <returns>The number of elements that the ArtList can contain before resizing is required.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">ArtList.Capacity is set to a value that is less than ArtList.Count.</exception>
+        public int Capacity
+        {
+            get => _artList.Length;
+            set
+            {
+                if (value < Count)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value));
+                }
+
+                if (value == _artList.Length)
+                {
+                    return;
+                }
+
+                if (value <= 0)
+                {
+                    _artList = new T[0];
+                }
+                else
+                {
+                    var newArray = new T[value];
+                    if (Count > 0)
+                    {
+                        Array.Copy(_artList, 0, newArray, 0, Count);
+                    }
+                    _artList = newArray;
+                }
+            }
+        }
 
         public bool IsReadOnly => false;
 
