@@ -84,7 +84,8 @@ namespace ArtList
         /// </summary>
         public void Clear()
         {
-            throw new NotImplementedException();
+            _artList = new T[Capacity];
+            _lastAssignedIndex = 0;
         }
 
         /// <summary>
