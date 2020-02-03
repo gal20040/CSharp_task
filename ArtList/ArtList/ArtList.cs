@@ -48,7 +48,7 @@ namespace ArtList
 
         public int Capacity => _artList.Length;
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// Adds an object to the end of the <see cref="ArtList"/>&lt;<see cref="T"/>&gt;.
