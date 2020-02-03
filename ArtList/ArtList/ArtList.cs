@@ -14,7 +14,7 @@ namespace ArtList
     {
         private T[] _artList;
 
-        private int _lastAssignedIndex;
+        private int _itemIndexToAssign;
 
         #region ctor
         /// <summary>
@@ -44,7 +44,7 @@ namespace ArtList
             set => _artList[index] = value;
         }
 
-        public int Count => _lastAssignedIndex;
+        public int Count => _itemIndexToAssign;
 
         public int Capacity => _artList.Length;
 
@@ -58,8 +58,8 @@ namespace ArtList
         {
             CheckCapacity();
 
-            _artList[_lastAssignedIndex] = item;
-            _lastAssignedIndex++;
+            _artList[_itemIndexToAssign] = item;
+            _itemIndexToAssign++;
         }
 
         private void CheckCapacity()
@@ -85,7 +85,7 @@ namespace ArtList
         public void Clear()
         {
             _artList = new T[Capacity];
-            _lastAssignedIndex = 0;
+            _itemIndexToAssign = 0;
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace ArtList
             Array.Copy(_artList, index, newArray, index + 1, Count - index);
 
             _artList = newArray;
-            _lastAssignedIndex++;
+            _itemIndexToAssign++;
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace ArtList
             Array.Copy(_artList, index + 1, newArray, index, Capacity - index - 1);
 
             _artList = newArray;
-            _lastAssignedIndex--;
+            _itemIndexToAssign--;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
