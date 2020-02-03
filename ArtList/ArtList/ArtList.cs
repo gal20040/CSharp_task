@@ -98,24 +98,39 @@ namespace ArtList
         }
 
         /// <summary>
-        /// Copies the entire <see cref="ArtList"/>&lt;<see cref="T"/>&gt; to a compatible one-dimensional array, starting at the specified index of the target array.
+        /// Copies the entire <see cref="ArtList"/>&lt;<see cref="T"/>&gt; to a compatible one-dimensional <param name="array">,
+        /// starting at the specified <param name="arrayIndex"> of the target <param name="array">.
         /// </summary>
-        /// <param name="array">The one-dimensional System.Array that is the destination of the elements copied from <see cref="ArtList"/>&lt;<see cref="T"/>&gt;. The System.Array must have zero-based indexing.</param>
-        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ArtList"/>&lt;<see cref="T"/>&gt;.
+        /// The <see cref="Array"/> must have zero-based indexing.</param>
+        /// <param name="arrayIndex">The zero-based <param name="arrayIndex"> in <paramref name="array"/> at which copying begins.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="array"/> is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
+        /// <exception cref="ArgumentException">
+        /// The number of elements in the source <see cref="ArtList"/>&lt;<see cref="T"/>&gt; is greater
+        /// than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.
+        /// </exception> 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            // Exceptions:
-            //   T:System.ArgumentNullException:
-            //     array is null.
-            //
-            //   T:System.ArgumentOutOfRangeException:
-            //     arrayIndex is less than 0.
-            //
-            //   T:System.ArgumentException:
-            //     The number of elements in the source <see cref="ArtList"/>&lt;<see cref="T"/>&gt; is greater
-            //     than the available space from arrayIndex to the end of the destination array.
+            if (array == null)
+            {
+                throw new ArgumentNullException(nameof(array));
+            }
 
-            throw new NotImplementedException();
+            if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+            }
+
+            var freeSpaceCount = array.Length - arrayIndex;
+            if (Count > freeSpaceCount)
+            {
+                throw new ArgumentException(nameof(arrayIndex));
+            }
+
+            if (Count <= 0) return; //nothing to copy
+
+            Array.Copy(_artList, 0, array, arrayIndex, Count);
         }
 
         public IEnumerator<T> GetEnumerator()
