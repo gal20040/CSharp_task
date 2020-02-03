@@ -94,7 +94,7 @@ namespace ArtList
         /// <returns>true if item is found in the <see cref="ArtList"/>&lt;<see cref="T"/>&gt;; otherwise, false.</returns>
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return IndexOf(item) >= 0;
         }
 
         /// <summary>
