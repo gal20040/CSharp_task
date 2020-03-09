@@ -42,7 +42,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountingSortAlgorithm_Tests.cs" />
+    <Compile Include="CountingSort_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +54,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CountingSortAlgorithm\CountingSortAlgorithm.csproj">
+    <ProjectReference Include="..\CountingSortAlgorithm\CountingSort.csproj">
       <Project>{CE8A8AC2-DBCB-41D3-A67F-F015236A667A}</Project>
-      <Name>CountingSortAlgorithm</Name>
+      <Name>CountingSort</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

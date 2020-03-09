@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace CountingSortAlgorithm_Tests
+namespace CountingSort_Tests
 {
     [TestClass]
-    public class CountingSortAlgorithm_Tests
+    public class CountingSort_Tests
     {
         #region PrepareNumbers
         [TestMethod]
