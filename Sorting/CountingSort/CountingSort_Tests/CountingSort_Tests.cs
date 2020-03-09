@@ -24,7 +24,7 @@ namespace CountingSort_Tests
             };
 
             var inputArray = new int[] { -2, -1, 0, 1, 2, 3 };
-            var actual = new CountingSortAlgorithm().PrepareNumbers(inputArray);
+            var actual = new CountingSort().PrepareNumbers(inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -34,7 +34,7 @@ namespace CountingSort_Tests
         public void PrepareNumbers_repeatedNumber_exception()
         {
             var inputArray = new int[] { -2, -2, 0, 1, 2, 3 };
-            new CountingSortAlgorithm().PrepareNumbers(inputArray);
+            new CountingSort().PrepareNumbers(inputArray);
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace CountingSort_Tests
         public void PrepareNumbers_lesserNumber_exception()
         {
             var inputArray = new int[] { -2, -3, 0, 1, 2, 3 };
-            new CountingSortAlgorithm().PrepareNumbers(inputArray);
+            new CountingSort().PrepareNumbers(inputArray);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace CountingSort_Tests
             var expected = new Dictionary<int, int>();
 
             var inputArray = new int[] { };
-            var actual = new CountingSortAlgorithm().PrepareNumbers(inputArray);
+            var actual = new CountingSort().PrepareNumbers(inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -65,7 +65,7 @@ namespace CountingSort_Tests
 
             var possibleValues = new int[] { };
             var inputArray = new int[] { };
-            var actual = new CountingSortAlgorithm().Sort(possibleValues, inputArray);
+            var actual = new CountingSort().Sort(possibleValues, inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -77,7 +77,7 @@ namespace CountingSort_Tests
 
             var possibleValues = new int[] { 0, 1, 2, 3 };
             var inputArray = new int[] { 1, 0, 1, 2, 3, 1, 0, 2 };
-            var actual = new CountingSortAlgorithm().Sort(possibleValues, inputArray);
+            var actual = new CountingSort().Sort(possibleValues, inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -89,7 +89,7 @@ namespace CountingSort_Tests
 
             var possibleValues = new int[] { -3, -2, 0, 1, 2, 3, 9 };
             var inputArray = new int[] { 1, 0, 1, 2, 3, 1, -2, -3, 9 };
-            var actual = new CountingSortAlgorithm().Sort(possibleValues, inputArray);
+            var actual = new CountingSort().Sort(possibleValues, inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }

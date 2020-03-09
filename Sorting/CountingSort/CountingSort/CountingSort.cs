@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class CountingSortAlgorithm
+public class CountingSort
 {
-    public int[] Sort(int[] possibleValues, int[] array)
+    public int[] Sort(int[] array)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int[] Sort(Dictionary<int, int> possibleValues, int[] array)
     {
         if (array.Length == 0) return array;
 
-        var numbers = PrepareNumbers(possibleValues);
-
         foreach (var number in array)
         {
-            if (!numbers.ContainsKey(number))
+            if (!possibleValues.ContainsKey(number))
             {
                 throw new Exception($"{nameof(possibleValues)} не содержит число из {nameof(array)}: {number}");
             }
 
-            numbers[number]++;
+            possibleValues[number]++;
         }
 
         var i = 0;
         int counter;
         int value;
-        foreach (var number in numbers)
+        foreach (var number in possibleValues)
         {
             value = number.Key;
             counter = number.Value;
@@ -35,6 +38,12 @@ public class CountingSortAlgorithm
         }
 
         return array;
+    }
+
+    public int[] Sort(int[] possibleValues, int[] array)
+    {
+        var numbers = PrepareNumbers(possibleValues);
+        return Sort(numbers, array);
     }
 
     public Dictionary<int, int> PrepareNumbers(int[] possibleValues)
