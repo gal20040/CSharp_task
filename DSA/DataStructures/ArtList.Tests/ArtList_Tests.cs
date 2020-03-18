@@ -3,10 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace ArtList.Tests.Tests
+namespace ArtList.Tests
 {
     [TestClass]
-    public class ArtListTests : BaseForTests
+    public class ArtList_Tests : BaseTest
     {
         [TestMethod]
         public void Count_EmptyList()

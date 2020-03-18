@@ -1,9 +1,9 @@
 ﻿using ArtList.Tests.Helpers;
 using System.Collections.Generic;
 
-namespace ArtList.Tests.Tests
+namespace ArtList.Tests
 {
-    public class BaseForTests
+    public class BaseTest
     {
         protected ListCreator ListCreator = new ListCreator();
 
