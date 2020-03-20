@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sorting
 {
@@ -7,12 +8,43 @@ namespace Sorting
     {
         public int[] Sort(int[] array)
         {
-            throw new NotImplementedException();
+            var possibleValues = GetPossibleValues(array);
+
+            return Sort(possibleValues, array);
+        }
+
+        /// <summary>
+        /// Преобразует входной массив в коллекцию пар<число, zeroValue>, где ключи-числа не повторяются, а zeroValue = 0.
+        /// </summary>
+        /// <param name="array">Входной массив чисел (числа могут повторяться).</param>
+        /// <returns></returns>
+        public Dictionary<int, int> GetPossibleValues(int[] array)
+        {
+            var possibleValuesSet = new SortedSet<int>();
+
+            foreach (var item in array)
+            {
+                //получить упорядоченный список уникальных значений
+                //если такое значение уже есть, то ничего не добавляется
+                possibleValuesSet.Add(item);
+            }
+
+            var possibleValues = new Dictionary<int, int>();
+            const int zeroValue = 0; //начальное значение кол-ва чисел в словаре
+
+            foreach (var item in possibleValuesSet)
+            {
+                possibleValues.Add(item, zeroValue);
+            }
+
+            return possibleValues;
         }
 
         public int[] Sort(Dictionary<int, int> possibleValues, int[] array)
         {
-            if (array.Length == 0) return array;
+            if (array.Length == 0) return new int[] { };
+
+            ResetValuesToZero(possibleValues);
 
             foreach (var number in array)
             {
@@ -24,16 +56,29 @@ namespace Sorting
                 possibleValues[number]++;
             }
 
-            var i = 0;
-            int counter;
-            int value;
-            foreach (var number in possibleValues)
+            return RepopulateArray(possibleValues, array);
+        }
+
+        public void ResetValuesToZero(Dictionary<int, int> possibleValues)
+        {
+            foreach (var key in possibleValues.Keys.ToList())
             {
-                value = number.Key;
-                counter = number.Value;
+                possibleValues[key] = 0;
+            }
+        }
+
+        public int[] RepopulateArray(Dictionary<int, int> possibleValues, int[] array)
+        {
+            var i = 0;
+            int number, counter;
+
+            foreach (var item in possibleValues)
+            {
+                number = item.Key;
+                counter = item.Value;
                 while (counter > 0)
                 {
-                    array[i] = value;
+                    array[i] = number;
                     counter--;
                     i++;
                 }
@@ -44,33 +89,8 @@ namespace Sorting
 
         public int[] Sort(int[] possibleValues, int[] array)
         {
-            var numbers = PrepareNumbers(possibleValues);
-            return Sort(numbers, array);
-        }
-
-        public Dictionary<int, int> PrepareNumbers(int[] possibleValues)
-        {
-            const int initialCount = 0;
-
-            var numbers = new Dictionary<int, int>();
-
-            if (possibleValues.Length == 0) return numbers;
-
-            var minNumber = possibleValues[0];
-            numbers.Add(possibleValues[0], initialCount);
-
-            for (int i = 1; i < possibleValues.Length; i++)
-            {
-                var number = possibleValues[i];
-                if (number <= minNumber)
-                {
-                    throw new Exception($"Массив {nameof(possibleValues)} должен содержать сортированные по возврастанию уникальные значения.");
-                }
-
-                numbers.Add(number, 0);
-            }
-
-            return numbers;
+            var possibleValuesDictionary = GetPossibleValues(possibleValues);
+            return Sort(possibleValuesDictionary, array);
         }
     }
 }

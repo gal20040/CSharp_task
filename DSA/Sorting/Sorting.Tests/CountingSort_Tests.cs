@@ -8,59 +8,49 @@ namespace CountingSort_Tests
     [TestClass]
     public class CountingSort_Tests
     {
-        #region PrepareNumbers
+        #region GetPossibleValues
         [TestMethod]
-        public void PrepareNumbers()
+        public void GetPossibleValues_ok()
         {
-            const int initialCount = 0;
-
+            const int zero = 0;
             var expected = new Dictionary<int, int>
             {
-                { -2, initialCount },
-                { -1, initialCount },
-                {  0, initialCount },
-                {  1, initialCount },
-                {  2, initialCount },
-                {  3, initialCount }
+                { -30, zero },
+                { -20, zero },
+                { 0, zero },
+                { 10, zero },
+                { 20, zero },
+                { 30, zero },
+                { 90, zero }
             };
-
-            var inputArray = new int[] { -2, -1, 0, 1, 2, 3 };
-            var actual = new CountingSort().PrepareNumbers(inputArray);
+            
+            var inputArray = new int[] { 10, 0, 10, 20, 30, 10, -20, -30, 90 };
+            var actual = new CountingSort().GetPossibleValues(inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void PrepareNumbers_repeatedNumber_exception()
-        {
-            var inputArray = new int[] { -2, -2, 0, 1, 2, 3 };
-            new CountingSort().PrepareNumbers(inputArray);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void PrepareNumbers_lesserNumber_exception()
-        {
-            var inputArray = new int[] { -2, -3, 0, 1, 2, 3 };
-            new CountingSort().PrepareNumbers(inputArray);
-        }
-
-        [TestMethod]
-        public void PrepareNumbers_emptyArray()
+        public void GetPossibleValues_EmptyArray()
         {
             var expected = new Dictionary<int, int>();
 
             var inputArray = new int[] { };
-            var actual = new CountingSort().PrepareNumbers(inputArray);
+            var actual = new CountingSort().GetPossibleValues(inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
         #endregion
 
         #region Sort
+        //[TestMethod]
+        ////todo: with exception
+        //public void Sort_()
+        //{
+        //}
+
         [TestMethod]
-        public void Sort_emptyArray()
+        public void Sort_PossibleValuesAndEmptyArray_ok()
         {
             var expected = new int[] { };
 
@@ -72,24 +62,38 @@ namespace CountingSort_Tests
         }
 
         [TestMethod]
-        public void Sort_10123102_ok()
+        public void Sort_JustEmptyArray_ok()
         {
-            var expected = new int[] { 0, 0, 1, 1, 1, 2, 2, 3 };
+            var expected = new int[] { };
 
-            var possibleValues = new int[] { 0, 1, 2, 3 };
-            var inputArray = new int[] { 1, 0, 1, 2, 3, 1, 0, 2 };
-            var actual = new CountingSort().Sort(possibleValues, inputArray);
+            var inputArray = new int[] { };
+            var actual = new CountingSort().Sort(inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void Sort_101231minus2minus39_ok()
+        public void Sort_JustInputArray_ok()
         {
-            var expected = new int[] { -3, -2, 0, 1, 1, 1, 2, 3, 9 };
+            var inputArray = new int[] { 9, -5, 5, 3, 7, -1, 6, 9, -1, 7, 2, 3, 6, 0, -7, 2, 7, -8, -9 };
+
+            var expected = (int[])inputArray.Clone();
+            Array.Sort(expected);
+
+            var actual = new CountingSort().Sort(inputArray);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Sort_PossibleValuesAndInputArray_ok()
+        {
+            var inputArray = new int[] { 1, 0, 1, 2, 3, 1, -2, -3, 9 };
+
+            var expected = (int[])inputArray.Clone();
+            Array.Sort(expected);
 
             var possibleValues = new int[] { -3, -2, 0, 1, 2, 3, 9 };
-            var inputArray = new int[] { 1, 0, 1, 2, 3, 1, -2, -3, 9 };
             var actual = new CountingSort().Sort(possibleValues, inputArray);
 
             CollectionAssert.AreEqual(expected, actual);
