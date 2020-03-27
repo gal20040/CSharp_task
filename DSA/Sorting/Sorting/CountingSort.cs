@@ -6,11 +6,16 @@ namespace Sorting
 {
     public class CountingSort
     {
-        public int[] Sort(int[] array)
+        /// <summary>Начальное значение кол-ва чисел в словаре</summary>
+        private const int zeroValue = 0;
+
+        public void Sort(int[] array)
         {
+            if (array == null) throw new ArgumentNullException(nameof(array));
+
             var possibleValues = GetPossibleValues(array);
 
-            return Sort(possibleValues, array);
+            Sort(possibleValues, array);
         }
 
         /// <summary>
@@ -20,17 +25,18 @@ namespace Sorting
         /// <returns></returns>
         public Dictionary<int, int> GetPossibleValues(int[] array)
         {
-            var possibleValuesSet = new SortedSet<int>();
+            if (array == null) throw new ArgumentNullException(nameof(array));
+
+            var possibleValuesSet = new SortedSet<int>(); //todo переделать на свой SortedSet
 
             foreach (var item in array)
             {
-                //получить упорядоченный список уникальных значений
+                //составить упорядоченный список уникальных значений
                 //если такое значение уже есть, то ничего не добавляется
                 possibleValuesSet.Add(item);
             }
 
             var possibleValues = new Dictionary<int, int>();
-            const int zeroValue = 0; //начальное значение кол-ва чисел в словаре
 
             foreach (var item in possibleValuesSet)
             {
@@ -40,9 +46,12 @@ namespace Sorting
             return possibleValues;
         }
 
-        public int[] Sort(Dictionary<int, int> possibleValues, int[] array)
+        public void Sort(Dictionary<int, int> possibleValues, int[] array)
         {
-            if (array.Length == 0) return new int[] { };
+            if (possibleValues == null) throw new ArgumentNullException(nameof(possibleValues));
+            if (array == null) throw new ArgumentNullException(nameof(array));
+
+            if (array.Length == 0) return;
 
             ResetValuesToZero(possibleValues);
 
@@ -56,19 +65,24 @@ namespace Sorting
                 possibleValues[number]++;
             }
 
-            return RepopulateArray(possibleValues, array);
+            RepopulateArray(possibleValues, array);
         }
 
         public void ResetValuesToZero(Dictionary<int, int> possibleValues)
         {
+            if (possibleValues == null) throw new ArgumentNullException(nameof(possibleValues));
+
             foreach (var key in possibleValues.Keys.ToList())
             {
-                possibleValues[key] = 0;
+                possibleValues[key] = zeroValue;
             }
         }
 
-        public int[] RepopulateArray(Dictionary<int, int> possibleValues, int[] array)
+        public void RepopulateArray(Dictionary<int, int> possibleValues, int[] array)
         {
+            if (possibleValues == null) throw new ArgumentNullException(nameof(possibleValues));
+            if (array == null) throw new ArgumentNullException(nameof(array));
+
             var i = 0;
             int number, counter;
 
@@ -83,14 +97,6 @@ namespace Sorting
                     i++;
                 }
             }
-
-            return array;
-        }
-
-        public int[] Sort(int[] possibleValues, int[] array)
-        {
-            var possibleValuesDictionary = GetPossibleValues(possibleValues);
-            return Sort(possibleValuesDictionary, array);
         }
     }
 }
