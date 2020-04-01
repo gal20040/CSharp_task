@@ -3,7 +3,7 @@ using Sorting;
 using System;
 using System.Collections.Generic;
 
-namespace CountingSort_Tests
+namespace Sorting.Tests
 {
     [TestClass]
     public class CountingSort_Tests
