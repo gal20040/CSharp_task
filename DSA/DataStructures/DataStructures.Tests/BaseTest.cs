@@ -1,7 +1,7 @@
-﻿using ArtList.Tests.Helpers;
+﻿using DataStructures.Tests.Helpers;
 using System.Collections.Generic;
 
-namespace ArtList.Tests
+namespace DataStructures.Tests
 {
     public class BaseTest
     {

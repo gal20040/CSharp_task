@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ArtList.Tests.Helpers
+namespace DataStructures.Tests.Helpers
 {
     public class ListCreator
     {

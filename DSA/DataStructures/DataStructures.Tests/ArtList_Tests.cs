@@ -1,9 +1,9 @@
-﻿using ArtList.Tests.Helpers;
+﻿using DataStructures.Tests.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace ArtList.Tests
+namespace DataStructures.Tests
 {
     [TestClass]
     public class ArtList_Tests : BaseTest

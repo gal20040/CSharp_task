@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F9F88545-A043-4B45-BE56-D3D966F5C459}</ProjectGuid>
+    <ProjectGuid>{DF6F5B08-D751-41E7-A8F7-B967BD002C5C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ArtList</RootNamespace>
-    <AssemblyName>ArtList</AssemblyName>
+    <RootNamespace>DataStructures</RootNamespace>
+    <AssemblyName>DataStructures</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,9 +43,6 @@
   <ItemGroup>
     <Compile Include="ArtList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

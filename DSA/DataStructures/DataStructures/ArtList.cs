@@ -2,9 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ArtList
+namespace DataStructures
 {
     /// <summary>
+    /// Написать класс MyList<T>, который реализует интерфейс IList<T>  
+    ///
+    /// Готов функционал за исключением:
+    /// 1. Конструктор для создания списка из переданного массива/коллекции:
+    /// ArtList<int> numbers = new ArtList<int>() { 1, 2, 3, 45 };
+    /// 2. GetEnumerator().
+    /// 
     /// Represents a strongly typed list of objects that can be accessed by index.Provides
     /// methods to search, sort, and manipulate lists.To browse the .NET Framework source
     /// code for this type, see the Reference Source.
