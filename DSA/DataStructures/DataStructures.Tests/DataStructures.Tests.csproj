@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ArtList_Tests.cs" />
     <Compile Include="BaseTest.cs" />
+    <Compile Include="BinaryTree_Tests.cs" />
     <Compile Include="Helpers\ListCreator.cs" />
     <Compile Include="Helpers\ListsComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

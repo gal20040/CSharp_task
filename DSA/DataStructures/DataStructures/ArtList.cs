@@ -19,9 +19,7 @@ namespace DataStructures
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     public class ArtList<T> : IList<T>
     {
-        private T[] _artList;
-
-        private int _itemIndexToAssign;
+        protected T[] _artList;
 
         #region ctor
         /// <summary>
@@ -51,7 +49,7 @@ namespace DataStructures
             set => _artList[index] = value;
         }
 
-        public int Count => _itemIndexToAssign;
+        public int Count { get; private set; }
 
         /// <summary>
         /// Gets or sets the total number of elements the internal data structure can hold without resizing.
@@ -95,12 +93,12 @@ namespace DataStructures
         /// Adds an object to the end of the <see cref="ArtList"/>&lt;<see cref="T"/>&gt;.
         /// </summary>
         /// <param name="item">The object to be added to the end of the <see cref="ArtList"/>&lt;<see cref="T"/>&gt;. The value can be null for reference types.</param>
-        public void Add(T item)
+        public virtual void Add(T item)
         {
             CheckCapacity();
 
-            _artList[_itemIndexToAssign] = item;
-            _itemIndexToAssign++;
+            _artList[Count] = item;
+            Count++;
         }
 
         private void CheckCapacity()
@@ -126,7 +124,7 @@ namespace DataStructures
         public void Clear()
         {
             _artList = new T[Capacity];
-            _itemIndexToAssign = 0;
+            Count = 0;
         }
 
         /// <summary>
@@ -214,7 +212,7 @@ namespace DataStructures
             Array.Copy(_artList, index, newArray, index + 1, Count - index);
 
             _artList = newArray;
-            _itemIndexToAssign++;
+            Count++;
         }
 
         /// <summary>
@@ -282,7 +280,7 @@ namespace DataStructures
             Array.Copy(_artList, index + 1, newArray, index, Capacity - index - 1);
 
             _artList = newArray;
-            _itemIndexToAssign--;
+            Count--;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
