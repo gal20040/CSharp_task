@@ -14,8 +14,8 @@
             this.rightChild = rightChild;
         }
 
-        TreeNode<T> getLeftChild() => leftChild;
+        public TreeNode<T> getLeftChild() => leftChild;
 
-        TreeNode<T> getRightChild() => rightChild;
+        public TreeNode<T> getRightChild() => rightChild;
     }
 }
