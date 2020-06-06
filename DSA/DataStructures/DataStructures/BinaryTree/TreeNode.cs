@@ -9,6 +9,7 @@
 
         public TreeNode(T data, TreeNode<T> leftChild = null, TreeNode<T> rightChild = null)
         {
+            //todo data не может быть null, но я не знаю, как сделать в данном случае проверку data на null
             Data = data;
             this.leftChild = leftChild;
             this.rightChild = rightChild;
@@ -17,5 +18,56 @@
         public TreeNode<T> getLeftChild() => leftChild;
 
         public TreeNode<T> getRightChild() => rightChild;
+
+        /// <summary>Прямое рекурсивное прохождение узлов дерева</summary>
+        /// <param name="tree">Узел дерева для прохождения</param>
+        public void PreOrder(TreeNode<T> tree)
+        {
+            // рекурсивное прохождение завершается на пустом поддереве
+            if (tree is null) return;
+
+            // посетить узел
+            visit(tree->data);
+
+            // спуститься по левому поддереву
+            PreOrder(tree.getLeftChild());
+
+            // спуститься по правому поддереву
+            PreOrder(tree.getRightChild());
+        }
+
+        /// <summary>Симметричное рекурсивное прохождение узлов дерева</summary>
+        /// <param name="tree">Узел дерева для прохождения</param>
+        public void InOrder(TreeNode<T> tree)
+        {
+            // рекурсивное прохождение завершается на пустом поддереве
+            if (tree is null) return;
+
+            // спуститься по левому поддереву
+            InOrder(tree.getLeftChild());
+
+            // посетить узел
+            visit(tree->data);
+
+            // спуститься по правому поддереву
+            InOrder(tree.getRightChild());
+        }
+
+        /// <summary>Обратное рекурсивное прохождение узлов дерева</summary>
+        /// <param name="tree">Узел дерева для прохождения</param>
+        public void PostOrder(TreeNode<T> tree)
+        {
+            // рекурсивное прохождение завершается на пустом поддереве
+            if (tree is null) return;
+
+            // спуститься по левому поддереву
+            PostOrder(tree.getLeftChild());
+
+            // спуститься по правому поддереву
+            PostOrder(tree.getRightChild());
+
+            // посетить узел
+            visit(tree->data);
+        }
     }
 }
