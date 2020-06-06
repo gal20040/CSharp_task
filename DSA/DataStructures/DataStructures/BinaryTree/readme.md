@@ -1,0 +1,1 @@
+﻿По мотивам http://www.k-press.ru/cs/2000/3/trees/trees.asp
