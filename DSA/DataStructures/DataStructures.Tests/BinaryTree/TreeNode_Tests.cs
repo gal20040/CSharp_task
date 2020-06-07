@@ -185,25 +185,93 @@ namespace DataStructures.Tests.BinaryTree
         }
 
         [TestMethod]
-        public void CountLeaves_leftDegenerateTree_1LeafExpected()
+        public void CountLeaves_leftDegeneratedTree_1LeafExpected()
         {
             var expectedCountLeaves = 1;
 
-            var treeNodeData = new Random().Next();
-
-            var treeNode = new TreeNode<int>(treeNodeData);
-            treeNode = new TreeNode<int>(treeNodeData, treeNode);
-            treeNode = new TreeNode<int>(treeNodeData, treeNode);
-            treeNode = new TreeNode<int>(treeNodeData, treeNode);
-            treeNode = new TreeNode<int>(treeNodeData, treeNode);
+            var nodeCount = 5;
+            var treeNode = getLeftDegeneratedTreeWithNodes(nodeCount);
 
             var actualCountLeaves = treeNode.CountLeaves();
 
             Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
         }
+
+        private TreeNode<int> getLeftDegeneratedTreeWithNodes(int nodeCount)
+        {
+            TreeNode<int> treeNode = null;
+
+            while (nodeCount > 0)
+            {
+                var treeNodeData = new Random().Next();
+
+                treeNode = new TreeNode<int>(treeNodeData, treeNode);
+
+                nodeCount--;
+            }
+
+            return treeNode;
+        }
+
+        private TreeNode<int> getRightDegeneratedTreeWithNodes(int nodeCount)
+        {
+            TreeNode<int> treeNode = null;
+
+            while (nodeCount > 0)
+            {
+                var treeNodeData = new Random().Next();
+
+                treeNode = new TreeNode<int>(treeNodeData, null, treeNode);
+
+                nodeCount--;
+            }
+
+            return treeNode;
+        }
         #endregion
 
-        #region 
+        #region Depth
+        [TestMethod]
+        public void Depth_onlyRoot_0Expected()
+        {
+            var expectedDepth = 0;
+
+            var nodeCount = 1;
+            var treeNode = getLeftDegeneratedTreeWithNodes(nodeCount);
+
+            var actualDepth = treeNode.Depth();
+
+            Assert.AreEqual(expectedDepth, actualDepth);
+        }
+
+        [TestMethod]
+        public void Depth_leftDegeneratedTree_7LeafExpected()
+        {
+            var expectedDepth = 7;
+
+            var nodeCount = expectedDepth + 1;
+            var treeNode = getLeftDegeneratedTreeWithNodes(nodeCount);
+
+            var actualDepth = treeNode.Depth();
+
+            Assert.AreEqual(expectedDepth, actualDepth);
+        }
+
+        [TestMethod]
+        public void Depth_leftAndRightDegeneratedTree_7LeafExpected()
+        {
+            var leftTreeNodeCount = 6;
+            var rightTreeNodeCount = leftTreeNodeCount + 1;
+            var expectedDepth = rightTreeNodeCount;
+
+            var leftSubtreeNode = getLeftDegeneratedTreeWithNodes(leftTreeNodeCount);
+            var rightSubtreeNode = getRightDegeneratedTreeWithNodes(rightTreeNodeCount);
+            var rootNode = new TreeNode<int>(1, leftSubtreeNode, rightSubtreeNode);
+
+            var actualDepth = rootNode.Depth();
+
+            Assert.AreEqual(expectedDepth, actualDepth);
+        }
         #endregion
 
         #region 

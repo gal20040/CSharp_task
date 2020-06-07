@@ -74,6 +74,7 @@ namespace DataStructures.BinaryTree
         //}
         //#endregion
 
+        #region CountLeaves
         /// <summary>Подсчитать количество листьев в данном поддереве.</summary>
         /// <returns>Количество листьев в данном поддереве.</returns>
         public int CountLeaves() => CountLeaves(this);
@@ -89,5 +90,23 @@ namespace DataStructures.BinaryTree
         }
 
         public bool IsLeaf() => leftChild == null && rightChild == null;
+        #endregion
+
+        #region Depth
+        /// <summary>Вычисляет глубину дерева.</summary>
+        public int Depth() => Depth(this) - 1; //todo не знаю, как избавиться от лишнего уровня глубины
+
+        private int Depth(TreeNode<T> tree)
+        {
+            // рекурсивное прохождение завершается на пустом поддереве
+            if (tree is null) return 0;
+
+            var depthLeft = Depth(tree.leftChild);
+            var depthRight = Depth(tree.rightChild);
+            var depth = 1 + (depthLeft >= depthRight ? depthLeft : depthRight);
+
+            return depth;
+        }
+        #endregion
     }
 }
