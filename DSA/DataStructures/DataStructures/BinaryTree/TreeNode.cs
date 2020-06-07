@@ -83,11 +83,11 @@ namespace DataStructures.BinaryTree
             // рекурсивное прохождение завершается на пустом поддереве
             if (tree is null) return 0;
 
-            if (IsLeaf()) return 1;
+            if (tree.IsLeaf()) return 1;
 
-            return CountLeaves(tree.getLeftChild()) + CountLeaves(tree.getRightChild());
+            return CountLeaves(tree.leftChild) + CountLeaves(tree.rightChild);
         }
 
-        public bool IsLeaf() => getLeftChild() == null && getRightChild() == null;
+        public bool IsLeaf() => leftChild == null && rightChild == null;
     }
 }

@@ -7,6 +7,20 @@ namespace DataStructures.Tests.BinaryTree
     [TestClass]
     public class TreeNode_Tests : BaseTest
     {
+        private TreeNode<int> getTreeWithNodes(int nodeCount)
+        {
+            if (nodeCount <= 0) return null;
+
+            var treeNodeData = new Random().Next();
+            nodeCount--;
+            var nodesInRightSubtree = nodeCount / 2;
+            var nodesInLeftSubtree = nodeCount - nodesInRightSubtree;
+
+            var treeNode = new TreeNode<int>(treeNodeData, getTreeWithNodes(nodesInLeftSubtree), getTreeWithNodes(nodesInRightSubtree));
+
+            return treeNode;
+        }
+
         #region ctor
         [TestMethod]
         public void CreateTreeNode()
@@ -139,9 +153,53 @@ namespace DataStructures.Tests.BinaryTree
 
         #region CountLeaves
         [TestMethod]
-        public void CountLeaves()
+        public void CountLeaves_onlyRoot_1LeafExpected()
         {
-            throw new NotImplementedException();
+            var nodeCount = 1;
+            var expectedCountLeaves = 1;
+
+            var treeNode = getTreeWithNodes(nodeCount);
+
+            var actualCountLeaves = treeNode.CountLeaves();
+
+            Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
+        }
+
+        [TestMethod]
+        public void CountLeaves_RootAndSeveralLevelsOfNodes_SeveralLeafExpected()
+        {
+            const int maxDepth = 10;
+            var treeDepth = 1 + new Random().Next(maxDepth);
+            var nodeCount = 0;
+            for (int i = 0; i <= treeDepth; i++)
+            {
+                nodeCount += (int)Math.Pow(2, i);
+            }
+            var expectedCountLeaves = (int)Math.Pow(2, treeDepth);
+
+            var treeNode = getTreeWithNodes(nodeCount);
+
+            var actualCountLeaves = treeNode.CountLeaves();
+
+            Assert.AreEqual(expectedCountLeaves, actualCountLeaves, $"\ntreeDepth = {treeDepth}, nodeCount = {nodeCount}");
+        }
+
+        [TestMethod]
+        public void CountLeaves_leftDegenerateTree_1LeafExpected()
+        {
+            var expectedCountLeaves = 1;
+
+            var treeNodeData = new Random().Next();
+
+            var treeNode = new TreeNode<int>(treeNodeData);
+            treeNode = new TreeNode<int>(treeNodeData, treeNode);
+            treeNode = new TreeNode<int>(treeNodeData, treeNode);
+            treeNode = new TreeNode<int>(treeNodeData, treeNode);
+            treeNode = new TreeNode<int>(treeNodeData, treeNode);
+
+            var actualCountLeaves = treeNode.CountLeaves();
+
+            Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
         }
         #endregion
 
