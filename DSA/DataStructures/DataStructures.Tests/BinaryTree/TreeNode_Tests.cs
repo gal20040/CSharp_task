@@ -197,6 +197,18 @@ namespace DataStructures.Tests.BinaryTree
             Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
         }
 
+        [TestMethod]
+        public void CountLeaves_preparedTree_3LeafExpected()
+        {
+            var expectedCountLeaves = 3;
+
+            var treeNode = getPreparedTree();
+
+            var actualCountLeaves = treeNode.CountLeaves();
+
+            Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
+        }
+
         private TreeNode<int> getLeftDegeneratedTreeWithNodes(int nodeCount)
         {
             TreeNode<int> treeNode = null;
@@ -271,6 +283,45 @@ namespace DataStructures.Tests.BinaryTree
             var actualDepth = rootNode.Depth();
 
             Assert.AreEqual(expectedDepth, actualDepth);
+        }
+
+        [TestMethod]
+        public void Depth_preparedTree_3LeafExpected()
+        {
+            var rootNode = getPreparedTree();
+
+            var expectedDepth = 3;
+
+            var actualDepth = rootNode.Depth();
+
+            Assert.AreEqual(expectedDepth, actualDepth);
+        }
+
+        /// <summary>Возвращает подготовленное дерево.<br/>
+        ///                       1
+        ///                      / \
+        ///                     /   \
+        ///                    2     3
+        ///                   / \   /
+        ///                  4   5 6
+        ///                         \
+        ///                          7
+        /// </summary>
+        private TreeNode<int> getPreparedTree()
+        {
+            var node4 = new TreeNode<int>(4);
+            var node5 = new TreeNode<int>(5);
+            var node7 = new TreeNode<int>(7);
+
+            var node2 = new TreeNode<int>(2, node4, node5);
+
+            var node6 = new TreeNode<int>(6, null, node7);
+
+            var node3 = new TreeNode<int>(3, node6);
+
+            var rootNode = new TreeNode<int>(1, node2, node3);
+
+            return rootNode;
         }
         #endregion
 
