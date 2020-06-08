@@ -325,6 +325,18 @@ namespace DataStructures.Tests.BinaryTree
         }
         #endregion
 
+        //#region CopyTree
+        //[TestMethod]
+        //public void CopyTree()
+        //{
+        //    var expectedTree = getPreparedTree();
+
+        //    var actualTree = expectedTree.CopyTree();
+
+        //    Assert.AreEqual(expectedTree, actualTree);
+        //}
+        //#endregion
+
         #region 
         #endregion
 

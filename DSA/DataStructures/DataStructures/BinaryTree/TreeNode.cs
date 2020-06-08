@@ -108,5 +108,32 @@ namespace DataStructures.BinaryTree
             return depth;
         }
         #endregion
+
+        #region CopyTree
+        /// <summary>Создаёт дубликат дерева tree и возвращает корень нового дерева.</summary>
+        /// <param name="tree"></param>
+        /// <returns></returns>
+        public TreeNode<T> CopyTree() => CopyTree(this);
+
+        private TreeNode<T> CopyTree(TreeNode<T> tree)
+        {
+            // остановить рекурсивное прохождение при достижении пустого дерева
+            if (tree == null) return null;
+
+            // строит новое дерево снизу вверх, сначала создавая двух сыновей, а затем их родителя
+
+            TreeNode<T> newLeftChild = null;
+            if (tree.leftChild != null)
+                newLeftChild = CopyTree(tree.leftChild);
+
+            TreeNode<T> newRightChild = null;
+            if (tree.rightChild != null)
+                newRightChild = CopyTree(tree.rightChild);
+
+            var newNode = new TreeNode<T>(tree.Data, newLeftChild, newRightChild);
+
+            return newNode;
+        }
+        #endregion
     }
 }
