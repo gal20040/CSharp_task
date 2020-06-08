@@ -337,7 +337,17 @@ namespace DataStructures.Tests.BinaryTree
         //}
         //#endregion
 
-        #region 
+        #region ToString
+        [TestMethod]
+        public void ToString_PreparedTree()
+        {
+            var expectedTree = getPreparedTree();
+            var expectedTreeString = "4 2 5 1 6 7 3";
+
+            var actualTreeString = expectedTree.ToString();
+
+            Assert.AreEqual(expectedTreeString, actualTreeString);
+        }
         #endregion
 
         #region 

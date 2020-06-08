@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace DataStructures.BinaryTree
 {
@@ -133,6 +134,32 @@ namespace DataStructures.BinaryTree
             var newNode = new TreeNode<T>(tree.Data, newLeftChild, newRightChild);
 
             return newNode;
+        }
+        #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            var res = ToStringInOrder(this).Trim();
+            return Regex.Replace(res, "[ ]+", " ");
+        }
+
+        private string ToStringInOrder(TreeNode<T> tree)
+        {
+            // остановить рекурсивное прохождение при достижении пустого дерева
+            if (tree == null) return "";
+
+            var result = "";
+
+            if (tree.leftChild != null)
+                result += ToStringInOrder(tree.leftChild);
+
+            result += $"{tree.Data.ToString()} ";
+
+            if (tree.rightChild != null)
+                result += ToStringInOrder(tree.rightChild);
+
+            return result;
         }
         #endregion
     }
