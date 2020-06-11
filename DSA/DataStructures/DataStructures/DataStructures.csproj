@@ -42,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtList.cs" />
-    <Compile Include="BinaryTree.cs" />
+    <Compile Include="BinaryTree\BinarySearchTree.cs" />
+    <Compile Include="BinaryTree\IBinarySearchTree.cs" />
     <Compile Include="BinaryTree\ITreeNode.cs" />
     <Compile Include="BinaryTree\TreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
