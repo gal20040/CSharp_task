@@ -9,7 +9,7 @@ namespace DataStructures.Tests.BinaryTree
     {
         private readonly Random random = new Random();
 
-        private TreeNode<int> getTreeWithNodes(int nodeCount)
+        private ITreeNode<int> getTreeWithNodes(int nodeCount)
         {
             if (nodeCount <= 0) return null;
 
@@ -23,7 +23,7 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        #region ctor
+        #region Test for ctor
         [TestMethod]
         public void CreateTreeNode()
         {
@@ -131,7 +131,7 @@ namespace DataStructures.Tests.BinaryTree
             var rightChildData = random.Next();
             var treeNodeData = random.Next();
 
-            TreeNode<int> leftChild = null;
+            ITreeNode<int> leftChild = null;
             var rightChild = new TreeNode<int>(rightChildData);
             var treeNode = new TreeNode<int>(treeNodeData, leftChild, rightChild);
 
@@ -211,9 +211,9 @@ namespace DataStructures.Tests.BinaryTree
             Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
         }
 
-        private TreeNode<int> getLeftDegeneratedTreeWithNodes(int nodeCount)
+        private ITreeNode<int> getLeftDegeneratedTreeWithNodes(int nodeCount)
         {
-            TreeNode<int> treeNode = null;
+            ITreeNode<int> treeNode = null;
 
             while (nodeCount > 0)
             {
@@ -227,9 +227,9 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        private TreeNode<int> getRightDegeneratedTreeWithNodes(int nodeCount)
+        private ITreeNode<int> getRightDegeneratedTreeWithNodes(int nodeCount)
         {
-            TreeNode<int> treeNode = null;
+            ITreeNode<int> treeNode = null;
 
             while (nodeCount > 0)
             {
@@ -243,7 +243,7 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        private TreeNode<int> getLeftAndRightDegeneratedTreeWithNodes(int leftNodeCount, int rightNodeCount)
+        private ITreeNode<int> getLeftAndRightDegeneratedTreeWithNodes(int leftNodeCount, int rightNodeCount)
         {
             var leftTree = getLeftDegeneratedTreeWithNodes(leftNodeCount);
             var rightTree = getRightDegeneratedTreeWithNodes(rightNodeCount);
@@ -318,7 +318,7 @@ namespace DataStructures.Tests.BinaryTree
         ///                         \
         ///                          7
         /// </summary>
-        private TreeNode<int> getPreparedTree()
+        private ITreeNode<int> getPreparedTree()
         {
             var node4 = new TreeNode<int>(4);
             var node5 = new TreeNode<int>(5);
