@@ -16,9 +16,17 @@ namespace DataStructures.BinaryTree
             this.rightChild = rightChild;
         }
 
+        #region get children
         public ITreeNode<T> getLeftChild() => leftChild;
 
         public ITreeNode<T> getRightChild() => rightChild;
+        #endregion
+
+        #region has child
+        public bool hasLeftChild() => leftChild != null;
+
+        public bool hasRightChild() => rightChild != null;
+        #endregion
 
         //#region Обход деревьев
         ///// <summary>Прямое рекурсивное прохождение узлов дерева</summary>
@@ -88,7 +96,7 @@ namespace DataStructures.BinaryTree
             return CountLeaves(treeNode.leftChild) + CountLeaves(treeNode.rightChild);
         }
 
-        public bool IsLeaf() => leftChild == null && rightChild == null;
+        public bool IsLeaf() => !hasLeftChild() && !hasRightChild();
         #endregion
 
         #region Depth
@@ -121,13 +129,9 @@ namespace DataStructures.BinaryTree
 
             var treeNode = tree as TreeNode<T>;
 
-            ITreeNode<T> newLeftChild = null;
-            if (treeNode.leftChild != null)
-                newLeftChild = CopyTree(treeNode.leftChild);
+            var newLeftChild = CopyTree(treeNode.leftChild);
 
-            ITreeNode<T> newRightChild = null;
-            if (treeNode.rightChild != null)
-                newRightChild = CopyTree(treeNode.rightChild);
+            var newRightChild = CopyTree(treeNode.rightChild);
 
             var newNode = new TreeNode<T>(treeNode.Data, newLeftChild, newRightChild);
 
@@ -151,12 +155,12 @@ namespace DataStructures.BinaryTree
 
             var treeNode = tree as TreeNode<T>;
 
-            if (treeNode.leftChild != null)
+            if (treeNode.hasLeftChild())
                 result += ToStringInOrder(treeNode.leftChild);
 
             result += $"{treeNode.Data.ToString()} ";
 
-            if (treeNode.rightChild != null)
+            if (treeNode.hasRightChild())
                 result += ToStringInOrder(treeNode.rightChild);
 
             return result;

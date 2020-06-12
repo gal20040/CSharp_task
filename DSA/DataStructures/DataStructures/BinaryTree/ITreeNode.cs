@@ -10,6 +10,14 @@
         ITreeNode<T> getRightChild();
         #endregion
 
+        #region has child
+        /// <summary>Есть ли левый сын</summary>
+        bool hasLeftChild();
+
+        /// <summary>Есть ли правый сын</summary>
+        bool hasRightChild();
+        #endregion
+
         #region CountLeaves
         /// <summary>Подсчитать количество листьев в данном поддереве</summary>
         int CountLeaves();
