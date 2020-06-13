@@ -4,28 +4,26 @@ namespace DataStructures.BinaryTree
 {
     public class TreeNode<T> : ITreeNode<T>
     {
-        private ITreeNode<T> leftChild;
-        private ITreeNode<T> rightChild;
+        private TreeNode<T> leftChild;
+        private TreeNode<T> rightChild;
 
         public T Data;
 
-        public TreeNode(T data, ITreeNode<T> leftChild = null, ITreeNode<T> rightChild = null)
+        public TreeNode(T data, TreeNode<T> leftChild = null, TreeNode<T> rightChild = null)
         {
-            Data = data;
-            this.leftChild = leftChild;
-            this.rightChild = rightChild;
+            Update(data, leftChild, rightChild);
         }
 
         #region get children
-        public ITreeNode<T> getLeftChild() => leftChild;
+        public ITreeNode<T> GetLeftChild() => leftChild;
 
-        public ITreeNode<T> getRightChild() => rightChild;
+        public ITreeNode<T> GetRightChild() => rightChild;
         #endregion
 
         #region has child
-        public bool hasLeftChild() => leftChild != null;
+        public bool HasLeftChild() => leftChild != null;
 
-        public bool hasRightChild() => rightChild != null;
+        public bool HasRightChild() => rightChild != null;
         #endregion
 
         //#region Обход деревьев
@@ -96,7 +94,7 @@ namespace DataStructures.BinaryTree
             return CountLeaves(treeNode.leftChild) + CountLeaves(treeNode.rightChild);
         }
 
-        public bool IsLeaf() => !hasLeftChild() && !hasRightChild();
+        public bool IsLeaf() => !HasLeftChild() && !HasRightChild();
         #endregion
 
         #region Depth
@@ -120,7 +118,7 @@ namespace DataStructures.BinaryTree
         #region CopyTree
         public ITreeNode<T> CopyTree() => CopyTree(this);
 
-        private ITreeNode<T> CopyTree(ITreeNode<T> tree)
+        private TreeNode<T> CopyTree(ITreeNode<T> tree)
         {
             // остановить рекурсивное прохождение при достижении пустого дерева
             if (tree == null) return null;
@@ -155,15 +153,26 @@ namespace DataStructures.BinaryTree
 
             var treeNode = tree as TreeNode<T>;
 
-            if (treeNode.hasLeftChild())
+            if (treeNode.HasLeftChild())
                 result += ToStringInOrder(treeNode.leftChild);
 
-            result += $"{treeNode.Data.ToString()} ";
+            result += $"{treeNode.Data} ";
 
-            if (treeNode.hasRightChild())
+            if (treeNode.HasRightChild())
                 result += ToStringInOrder(treeNode.rightChild);
 
             return result;
+        }
+        #endregion
+
+        #region Update
+        public TreeNode<T> Update(T data, ITreeNode<T> leftChild = null, ITreeNode<T> rightChild = null)
+        {
+            Data = data;
+            this.leftChild = leftChild as TreeNode<T>;
+            this.rightChild = rightChild as TreeNode<T>;
+
+            return this;
         }
         #endregion
     }

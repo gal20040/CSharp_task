@@ -4,18 +4,18 @@
     {
         #region get children
         /// <summary>Вернуть левого сына</summary>
-        ITreeNode<T> getLeftChild();
+        ITreeNode<T> GetLeftChild();
 
         /// <summary>Вернуть правого сына</summary>
-        ITreeNode<T> getRightChild();
+        ITreeNode<T> GetRightChild();
         #endregion
 
         #region has child
         /// <summary>Есть ли левый сын</summary>
-        bool hasLeftChild();
+        bool HasLeftChild();
 
         /// <summary>Есть ли правый сын</summary>
-        bool hasRightChild();
+        bool HasRightChild();
         #endregion
 
         #region CountLeaves
@@ -32,6 +32,11 @@
         /// <summary>Создаёт дубликат дерева tree и возвращает корень нового дерева</summary>
         ITreeNode<T> CopyTree();
 
+        /// <summary>Представляет текущий узел и всех его потомков в виде строки через пробел с InOrder обходом</summary>
         string ToString();
+
+        /// <summary>Обновляет текущий узел: значение, левого или правого сына</summary>
+        /// <returns>Вернуть обновлённый узел</returns>
+        TreeNode<T> Update(T data, ITreeNode<T> leftChild = null, ITreeNode<T> rightChild = null);
     }
 }

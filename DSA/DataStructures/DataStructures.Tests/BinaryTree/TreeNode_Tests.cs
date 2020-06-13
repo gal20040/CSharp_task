@@ -9,7 +9,7 @@ namespace DataStructures.Tests.BinaryTree
     {
         private readonly Random random = new Random();
 
-        private ITreeNode<int> getTreeWithNodes(int nodeCount)
+        private TreeNode<int> GetTreeWithNodes(int nodeCount)
         {
             if (nodeCount <= 0) return null;
 
@@ -18,7 +18,7 @@ namespace DataStructures.Tests.BinaryTree
             var nodesInRightSubtree = nodeCount / 2;
             var nodesInLeftSubtree = nodeCount - nodesInRightSubtree;
 
-            var treeNode = new TreeNode<int>(treeNodeData, getTreeWithNodes(nodesInLeftSubtree), getTreeWithNodes(nodesInRightSubtree));
+            var treeNode = new TreeNode<int>(treeNodeData, GetTreeWithNodes(nodesInLeftSubtree), GetTreeWithNodes(nodesInRightSubtree));
 
             return treeNode;
         }
@@ -32,15 +32,15 @@ namespace DataStructures.Tests.BinaryTree
             var treeNode = new TreeNode<int>(treeNodeData);
 
             Assert.AreEqual(treeNodeData, treeNode.Data);
-            Assert.IsNull(treeNode.getLeftChild());
-            Assert.IsNull(treeNode.getRightChild());
+            Assert.IsNull(treeNode.GetLeftChild());
+            Assert.IsNull(treeNode.GetRightChild());
 
             treeNodeData = random.Next();
             treeNode.Data = treeNodeData;
 
             Assert.AreEqual(treeNodeData, treeNode.Data);
-            Assert.IsNull(treeNode.getLeftChild());
-            Assert.IsNull(treeNode.getRightChild());
+            Assert.IsNull(treeNode.GetLeftChild());
+            Assert.IsNull(treeNode.GetRightChild());
         }
 
         [TestMethod]
@@ -54,20 +54,20 @@ namespace DataStructures.Tests.BinaryTree
 
             Assert.AreEqual(treeNodeData, treeNode.Data);
 
-            var leftChildActual = treeNode.getLeftChild();
+            var leftChildActual = treeNode.GetLeftChild();
             Assert.AreEqual(leftChild, leftChildActual);
 
-            Assert.IsNull(treeNode.getRightChild());
+            Assert.IsNull(treeNode.GetRightChild());
 
             treeNodeData = random.Next();
             treeNode.Data = treeNodeData;
 
             Assert.AreEqual(treeNodeData, treeNode.Data);
 
-            leftChildActual = treeNode.getLeftChild();
+            leftChildActual = treeNode.GetLeftChild();
             Assert.AreEqual(leftChild, leftChildActual);
 
-            Assert.IsNull(treeNode.getRightChild());
+            Assert.IsNull(treeNode.GetRightChild());
         }
 
         [TestMethod]
@@ -83,10 +83,10 @@ namespace DataStructures.Tests.BinaryTree
 
             Assert.AreEqual(treeNodeData, treeNode.Data);
 
-            var leftChildActual = treeNode.getLeftChild();
+            var leftChildActual = treeNode.GetLeftChild();
             Assert.AreEqual(leftChild, leftChildActual);
 
-            var rightChildActual = treeNode.getRightChild();
+            var rightChildActual = treeNode.GetRightChild();
             Assert.AreEqual(rightChild, rightChildActual);
 
             treeNodeData = random.Next();
@@ -94,10 +94,10 @@ namespace DataStructures.Tests.BinaryTree
 
             Assert.AreEqual(treeNodeData, treeNode.Data);
 
-            leftChildActual = treeNode.getLeftChild();
+            leftChildActual = treeNode.GetLeftChild();
             Assert.AreEqual(leftChild, leftChildActual);
 
-            rightChildActual = treeNode.getRightChild();
+            rightChildActual = treeNode.GetRightChild();
             Assert.AreEqual(rightChild, rightChildActual);
         }
         #endregion
@@ -131,7 +131,7 @@ namespace DataStructures.Tests.BinaryTree
             var rightChildData = random.Next();
             var treeNodeData = random.Next();
 
-            ITreeNode<int> leftChild = null;
+            TreeNode<int> leftChild = null;
             var rightChild = new TreeNode<int>(rightChildData);
             var treeNode = new TreeNode<int>(treeNodeData, leftChild, rightChild);
 
@@ -160,7 +160,7 @@ namespace DataStructures.Tests.BinaryTree
             var nodeCount = 1;
             var expectedCountLeaves = 1;
 
-            var treeNode = getTreeWithNodes(nodeCount);
+            var treeNode = GetTreeWithNodes(nodeCount);
 
             var actualCountLeaves = treeNode.CountLeaves();
 
@@ -179,7 +179,7 @@ namespace DataStructures.Tests.BinaryTree
             }
             var expectedCountLeaves = (int)Math.Pow(2, treeDepth);
 
-            var treeNode = getTreeWithNodes(nodeCount);
+            var treeNode = GetTreeWithNodes(nodeCount);
 
             var actualCountLeaves = treeNode.CountLeaves();
 
@@ -192,7 +192,7 @@ namespace DataStructures.Tests.BinaryTree
             var expectedCountLeaves = 1;
 
             var nodeCount = 5;
-            var treeNode = getLeftDegeneratedTreeWithNodes(nodeCount);
+            var treeNode = GetLeftDegeneratedTreeWithNodes(nodeCount);
 
             var actualCountLeaves = treeNode.CountLeaves();
 
@@ -204,16 +204,16 @@ namespace DataStructures.Tests.BinaryTree
         {
             var expectedCountLeaves = 3;
 
-            var treeNode = getPreparedTree();
+            var treeNode = GetPreparedTree();
 
             var actualCountLeaves = treeNode.CountLeaves();
 
             Assert.AreEqual(expectedCountLeaves, actualCountLeaves);
         }
 
-        private ITreeNode<int> getLeftDegeneratedTreeWithNodes(int nodeCount)
+        private TreeNode<int> GetLeftDegeneratedTreeWithNodes(int nodeCount)
         {
-            ITreeNode<int> treeNode = null;
+            TreeNode<int> treeNode = null;
 
             while (nodeCount > 0)
             {
@@ -227,9 +227,9 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        private ITreeNode<int> getRightDegeneratedTreeWithNodes(int nodeCount)
+        private TreeNode<int> GetRightDegeneratedTreeWithNodes(int nodeCount)
         {
-            ITreeNode<int> treeNode = null;
+            TreeNode<int> treeNode = null;
 
             while (nodeCount > 0)
             {
@@ -243,10 +243,10 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        private ITreeNode<int> getLeftAndRightDegeneratedTreeWithNodes(int leftNodeCount, int rightNodeCount)
+        private TreeNode<int> GetLeftAndRightDegeneratedTreeWithNodes(int leftNodeCount, int rightNodeCount)
         {
-            var leftTree = getLeftDegeneratedTreeWithNodes(leftNodeCount);
-            var rightTree = getRightDegeneratedTreeWithNodes(rightNodeCount);
+            var leftTree = GetLeftDegeneratedTreeWithNodes(leftNodeCount);
+            var rightTree = GetRightDegeneratedTreeWithNodes(rightNodeCount);
 
             var treeNodeData = random.Next();
             var root = new TreeNode<int>(treeNodeData, leftTree, rightTree);
@@ -262,7 +262,7 @@ namespace DataStructures.Tests.BinaryTree
             var expectedDepth = 0;
 
             var nodeCount = 1;
-            var treeNode = getLeftDegeneratedTreeWithNodes(nodeCount);
+            var treeNode = GetLeftDegeneratedTreeWithNodes(nodeCount);
 
             var actualDepth = treeNode.Depth();
 
@@ -275,7 +275,7 @@ namespace DataStructures.Tests.BinaryTree
             var expectedDepth = 7;
 
             var nodeCount = expectedDepth + 1;
-            var treeNode = getLeftDegeneratedTreeWithNodes(nodeCount);
+            var treeNode = GetLeftDegeneratedTreeWithNodes(nodeCount);
 
             var actualDepth = treeNode.Depth();
 
@@ -289,7 +289,7 @@ namespace DataStructures.Tests.BinaryTree
             var rightTreeNodeCount = leftTreeNodeCount + 1;
             var expectedDepth = rightTreeNodeCount;
 
-            var rootNode = getLeftAndRightDegeneratedTreeWithNodes(leftTreeNodeCount, rightTreeNodeCount);
+            var rootNode = GetLeftAndRightDegeneratedTreeWithNodes(leftTreeNodeCount, rightTreeNodeCount);
 
             var actualDepth = rootNode.Depth();
 
@@ -299,7 +299,7 @@ namespace DataStructures.Tests.BinaryTree
         [TestMethod]
         public void Depth_preparedTree_3LeafExpected()
         {
-            var rootNode = getPreparedTree();
+            var rootNode = GetPreparedTree();
 
             var expectedDepth = 3;
 
@@ -318,7 +318,7 @@ namespace DataStructures.Tests.BinaryTree
         ///                         \
         ///                          7
         /// </summary>
-        private ITreeNode<int> getPreparedTree()
+        private TreeNode<int> GetPreparedTree()
         {
             var node4 = new TreeNode<int>(4);
             var node5 = new TreeNode<int>(5);
@@ -340,7 +340,7 @@ namespace DataStructures.Tests.BinaryTree
         [TestMethod]
         public void CopyTree_PreparedTree()
         {
-            var expectedTree = getPreparedTree();
+            var expectedTree = GetPreparedTree();
 
             var actualTree = expectedTree.CopyTree();
 
@@ -350,7 +350,7 @@ namespace DataStructures.Tests.BinaryTree
         [TestMethod]
         public void CopyTree_LeftDegeneratedTree()
         {
-            var expectedTree = getLeftDegeneratedTreeWithNodes(5);
+            var expectedTree = GetLeftDegeneratedTreeWithNodes(5);
 
             var actualTree = expectedTree.CopyTree();
 
@@ -360,7 +360,7 @@ namespace DataStructures.Tests.BinaryTree
         [TestMethod]
         public void CopyTree_RightDegeneratedTree()
         {
-            var expectedTree = getRightDegeneratedTreeWithNodes(5);
+            var expectedTree = GetRightDegeneratedTreeWithNodes(5);
 
             var actualTree = expectedTree.CopyTree();
 
@@ -372,7 +372,7 @@ namespace DataStructures.Tests.BinaryTree
         {
             var leftTreeNodeCount = 6;
             var rightTreeNodeCount = leftTreeNodeCount + 1;
-            var expectedTree = getLeftAndRightDegeneratedTreeWithNodes(leftTreeNodeCount, rightTreeNodeCount);
+            var expectedTree = GetLeftAndRightDegeneratedTreeWithNodes(leftTreeNodeCount, rightTreeNodeCount);
 
             var actualTree = expectedTree.CopyTree();
 
@@ -384,7 +384,7 @@ namespace DataStructures.Tests.BinaryTree
         [TestMethod]
         public void ToString_PreparedTree()
         {
-            var expectedTree = getPreparedTree();
+            var expectedTree = GetPreparedTree();
             var expectedTreeString = "4 2 5 1 6 7 3";
 
             var actualTree = expectedTree;
