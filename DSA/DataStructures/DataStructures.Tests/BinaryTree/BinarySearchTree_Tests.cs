@@ -13,14 +13,18 @@ namespace DataStructures.Tests.BinaryTree
         [TestMethod]
         public void Insert_()
         {
-            var tree = new BinarySearchTree<int>();
+            const string expected = "40 45 50 70";
 
-            tree.Insert(50);
-            //tree.Insert(40);
-            //tree.Insert(70);
-            //tree.Insert(45);
+            var actualTree = new BinarySearchTree();
 
-            throw new System.NotImplementedException();
+            actualTree.Insert(50);
+            actualTree.Insert(40);
+            actualTree.Insert(70);
+            actualTree.Insert(45);
+
+            var actual = actualTree.GetRoot().ToString();
+
+            Assert.AreEqual(expected, actual);
         }
         #endregion
     }

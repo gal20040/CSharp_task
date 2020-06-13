@@ -1,41 +1,42 @@
 ﻿namespace DataStructures.BinaryTree
 {
-    public class BinarySearchTree<T> : IBinarySearchTree<T>
+    //todo: сначала сделаю на int, с дженериками как-то не задалось - простое сравнение не работает: Operator >= cannot be applied to operands of type 'int' and 'int'
+    public class BinarySearchTree : IBinarySearchTree<int>
     {
-        private TreeNode<T> rootNode = null;
-        private TreeNode<T> currentNode = null;
+        private TreeNode<int> rootNode = null;
+        private TreeNode<int> currentNode = null;
 
         private int nodeCount;
 
         public BinarySearchTree() { }
         
-        public BinarySearchTree(BinarySearchTree<T> tree)
+        public BinarySearchTree(BinarySearchTree tree)
         {
             throw new System.NotImplementedException();
         }
 
-        public TreeNode<T> Delete(T item)
+        public TreeNode<int> Delete(int item)
         {
             throw new System.NotImplementedException();
         }
 
-        public int Find(T item)
+        public int Find(int item)
         {
             throw new System.NotImplementedException();
         }
 
-        public TreeNode<T> FindNode(T item, TreeNode<T> parent)
+        public TreeNode<int> FindNode(int item, TreeNode<int> parent)
         {
             throw new System.NotImplementedException();
         }
 
-        public TreeNode<T> GetRoot() => rootNode;
+        public TreeNode<int> GetRoot() => rootNode;
 
-        public TreeNode<T> Insert(T item)
+        public TreeNode<int> Insert(int value)
         {
             if (rootNode == null)
             {
-                rootNode = new TreeNode<T>(item);
+                rootNode = new TreeNode<int>(value);
                 //currentNode = rootNode;
 
                 return rootNode;
@@ -43,15 +44,37 @@
 
             if (currentNode == null) currentNode = rootNode;
 
-            //if (item < currentNode.Data)
-            //{
-            //    if (currentNode.getLeftChild())
-            //}
+            if (value < currentNode.Data)
+            {
+                if (currentNode.HasLeftChild())
+                {
+                    currentNode = currentNode.GetLeftChild() as TreeNode<int>;
+                    Insert(value);
+                    currentNode = null;
+                }
+                else
+                {
+                    currentNode.Update(currentNode.Data, new TreeNode<int>(value), currentNode.GetRightChild());
+                }
+            }
+            else
+            {
+                if (currentNode.HasRightChild())
+                {
+                    currentNode = currentNode.GetRightChild() as TreeNode<int>;
+                    Insert(value);
+                    currentNode = null;
+                }
+                else
+                {
+                    currentNode.Update(currentNode.Data, currentNode.GetLeftChild(), new TreeNode<int>(value));
+                }
+            }
 
             return currentNode;
         }
 
-        public TreeNode<T> Update(T item)
+        public TreeNode<int> Update(int item)
         {
             throw new System.NotImplementedException();
         }
