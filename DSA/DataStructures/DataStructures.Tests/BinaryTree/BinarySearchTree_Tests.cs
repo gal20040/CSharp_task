@@ -62,6 +62,23 @@ namespace DataStructures.Tests.BinaryTree
         }
 
         [TestMethod]
+        public void Insert_treeWithIdenticalNodes_ok()
+        {
+            const string expected = "60 60 60 60";
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(60);
+            actualTree.Insert(60);
+            actualTree.Insert(60);
+            actualTree.Insert(60);
+
+            var actual = actualTree.GetRoot().ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void Insert_leftAndRightDegeneratedTree_ok()
         {
             const string expected = "10 20 30 40 50 60 70 80 90";
