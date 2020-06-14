@@ -34,7 +34,6 @@
                 {
                     currentNode = currentNode.GetLeftChild() as TreeNode<int>;
                     requiredNode = Find(value);
-                    currentNode = null;
                 }
                 else
                 {
@@ -51,13 +50,14 @@
                 {
                     currentNode = currentNode.GetRightChild() as TreeNode<int>;
                     requiredNode = Find(value);
-                    currentNode = null;
                 }
                 else
                 {
                     requiredNode = null;
                 }
             }
+
+            currentNode = null;
 
             return requiredNode;
         }
@@ -86,7 +86,6 @@
                 {
                     currentNode = currentNode.GetLeftChild() as TreeNode<int>;
                     Insert(value);
-                    currentNode = null;
                 }
                 else
                 {
@@ -99,13 +98,14 @@
                 {
                     currentNode = currentNode.GetRightChild() as TreeNode<int>;
                     Insert(value);
-                    currentNode = null;
                 }
                 else
                 {
                     currentNode.AddRightChild(new TreeNode<int>(value));
                 }
             }
+
+            currentNode = null;
 
             return currentNode;
         }
