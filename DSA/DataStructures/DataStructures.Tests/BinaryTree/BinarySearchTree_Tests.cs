@@ -102,5 +102,110 @@ namespace DataStructures.Tests.BinaryTree
             Assert.AreEqual(expected, actual);
         }
         #endregion
+
+        #region Find
+        [TestMethod]
+        public void Find_mixedTree_nullExpectedInLeftSubtree()
+        {
+            const int requiredNodeData = 10;
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(50);
+            actualTree.Insert(40);
+            actualTree.Insert(70);
+            actualTree.Insert(45);
+
+            var requiredNode = actualTree.Find(requiredNodeData);
+
+            Assert.IsNull(requiredNode);
+        }
+
+        [TestMethod]
+        public void Find_mixedTree_nullExpectedInRightSubtree()
+        {
+            const int requiredNodeData = 100;
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(50);
+            actualTree.Insert(40);
+            actualTree.Insert(70);
+            actualTree.Insert(45);
+
+            var requiredNode = actualTree.Find(requiredNodeData);
+
+            Assert.IsNull(requiredNode);
+        }
+
+        [TestMethod]
+        public void Find_mixedTree_ok()
+        {
+            const int expectedNodeData = 40;
+            const int expectedRightChildData = 45;
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(50);
+            actualTree.Insert(40);
+            actualTree.Insert(70);
+            actualTree.Insert(45);
+
+            var requiredNode = actualTree.Find(expectedNodeData);
+            var actualLeftChild = requiredNode.GetLeftChild() as TreeNode<int>;
+            var actualRightChild = requiredNode.GetRightChild() as TreeNode<int>;
+
+            Assert.AreEqual(requiredNode.Data, expectedNodeData);
+            Assert.IsNull(actualLeftChild);
+            Assert.AreEqual(actualRightChild.Data, expectedRightChildData);
+        }
+
+        [TestMethod]
+        public void Find_leftDegeneratedTree_ok()
+        {
+            const int expectedNodeData = 20;
+            const int expectedLeftChildData = 10;
+            const int expectedRightChildData = 25;
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(40);
+            actualTree.Insert(30);
+            actualTree.Insert(20);
+            actualTree.Insert(10);
+            actualTree.Insert(25);
+
+            var requiredNode = actualTree.Find(expectedNodeData);
+            var actualLeftChild = requiredNode.GetLeftChild() as TreeNode<int>;
+            var actualRightChild = requiredNode.GetRightChild() as TreeNode<int>;
+
+            Assert.AreEqual(requiredNode.Data, expectedNodeData);
+            Assert.AreEqual(actualLeftChild.Data, expectedLeftChildData);
+            Assert.AreEqual(actualRightChild.Data, expectedRightChildData);
+        }
+
+        [TestMethod]
+        public void Find_rightDegeneratedTree_ok()
+        {
+            const int expectedNodeData = 60;
+            const int expectedRightChildData = 60;
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(60);
+            actualTree.Insert(60);
+            actualTree.Insert(70);
+            actualTree.Insert(80);
+            actualTree.Insert(90);
+
+            var requiredNode = actualTree.Find(expectedNodeData);
+            var actualLeftChild = requiredNode.GetLeftChild() as TreeNode<int>;
+            var actualRightChild = requiredNode.GetRightChild() as TreeNode<int>;
+
+            Assert.AreEqual(requiredNode.Data, expectedNodeData);
+            Assert.IsNull(actualLeftChild);
+            Assert.AreEqual(actualRightChild.Data, expectedRightChildData);
+        }
+        #endregion
     }
 }

@@ -9,7 +9,7 @@
         private int nodeCount;
 
         public BinarySearchTree() { }
-        
+
         public BinarySearchTree(BinarySearchTree tree)
         {
             throw new System.NotImplementedException();
@@ -20,9 +20,46 @@
             throw new System.NotImplementedException();
         }
 
-        public int Find(int item)
+        public TreeNode<int> Find(int value)
         {
-            throw new System.NotImplementedException();
+            if (rootNode == null) return null;
+
+            if (currentNode == null) currentNode = rootNode;
+
+            TreeNode<int> requiredNode;
+
+            if (value < currentNode.Data)
+            {
+                if (currentNode.HasLeftChild())
+                {
+                    currentNode = currentNode.GetLeftChild() as TreeNode<int>;
+                    requiredNode = Find(value);
+                    currentNode = null;
+                }
+                else
+                {
+                    requiredNode = null;
+                }
+            }
+            else if (value == currentNode.Data)
+            {
+                requiredNode = currentNode;
+            }
+            else
+            {
+                if (currentNode.HasRightChild())
+                {
+                    currentNode = currentNode.GetRightChild() as TreeNode<int>;
+                    requiredNode = Find(value);
+                    currentNode = null;
+                }
+                else
+                {
+                    requiredNode = null;
+                }
+            }
+
+            return requiredNode;
         }
 
         public TreeNode<int> FindNode(int item, TreeNode<int> parent)
@@ -37,7 +74,6 @@
             if (rootNode == null)
             {
                 rootNode = new TreeNode<int>(value);
-                //currentNode = rootNode;
 
                 return rootNode;
             }
