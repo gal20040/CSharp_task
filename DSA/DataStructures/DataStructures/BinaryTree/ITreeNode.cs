@@ -13,10 +13,10 @@
         #endregion
 
         #region get children
-        /// <summary>Возвращает левого сына</summary>
+        /// <summary>Возвращает левого сына. Либо null</summary>
         ITreeNode<T> GetLeftChild();
 
-        /// <summary>Возвращает правого сына</summary>
+        /// <summary>Возвращает правого сына. Либо null</summary>
         ITreeNode<T> GetRightChild();
         #endregion
 

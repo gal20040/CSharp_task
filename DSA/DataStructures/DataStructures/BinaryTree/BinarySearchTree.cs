@@ -5,6 +5,7 @@
     {
         private TreeNode<int> rootNode = null;
         private TreeNode<int> currentNode = null;
+        private TreeNode<int> currentNodeParent = null;
 
         private int nodeCount;
 
@@ -24,40 +25,28 @@
         {
             if (rootNode == null) return null;
 
-            if (currentNode == null) currentNode = rootNode;
+            currentNode = rootNode;
+            currentNodeParent = null;
+            TreeNode<int> requiredNode = null;
 
-            TreeNode<int> requiredNode;
-
-            if (value < currentNode.Data)
+            while (currentNode != null)
             {
-                if (currentNode.HasLeftChild())
+                if (value < currentNode.Data)
                 {
+                    currentNodeParent = currentNode;
                     currentNode = currentNode.GetLeftChild() as TreeNode<int>;
-                    requiredNode = Find(value);
+                }
+                else if (value == currentNode.Data)
+                {
+                    requiredNode = currentNode;
+                    break;
                 }
                 else
                 {
-                    requiredNode = null;
-                }
-            }
-            else if (value == currentNode.Data)
-            {
-                requiredNode = currentNode;
-            }
-            else
-            {
-                if (currentNode.HasRightChild())
-                {
+                    currentNodeParent = currentNode;
                     currentNode = currentNode.GetRightChild() as TreeNode<int>;
-                    requiredNode = Find(value);
-                }
-                else
-                {
-                    requiredNode = null;
                 }
             }
-
-            currentNode = null;
 
             return requiredNode;
         }
