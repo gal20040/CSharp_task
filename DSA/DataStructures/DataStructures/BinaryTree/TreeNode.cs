@@ -11,8 +11,44 @@ namespace DataStructures.BinaryTree
 
         public TreeNode(T data, TreeNode<T> leftChild = null, TreeNode<T> rightChild = null)
         {
-            Update(data, leftChild, rightChild);
+            Data = data;
+            this.leftChild = leftChild;
+            this.rightChild = rightChild;
         }
+
+        #region add child
+        public ITreeNode<T> AddLeftChild(ITreeNode<T> leftChild)
+        {
+            if (leftChild is null) throw new System.ArgumentNullException(nameof(leftChild));
+
+            if (this.leftChild is null)
+            {
+                this.leftChild = leftChild as TreeNode<T>;
+            }
+            else
+            {
+                throw new System.ArgumentException($"{nameof(this.leftChild)} is not null");
+            }
+
+            return this;
+        }
+
+        public ITreeNode<T> AddRightChild(ITreeNode<T> rightChild)
+        {
+            if (rightChild is null) throw new System.ArgumentNullException(nameof(rightChild));
+
+            if (this.rightChild is null)
+            {
+                this.rightChild = rightChild as TreeNode<T>;
+            }
+            else
+            {
+                throw new System.ArgumentException($"{nameof(this.rightChild)} is not null");
+            }
+
+            return this;
+        }
+        #endregion
 
         #region get children
         public ITreeNode<T> GetLeftChild() => leftChild;
@@ -162,17 +198,6 @@ namespace DataStructures.BinaryTree
                 result += ToStringInOrder(treeNode.rightChild);
 
             return result;
-        }
-        #endregion
-
-        #region Update
-        public TreeNode<T> Update(T data, ITreeNode<T> leftChild = null, ITreeNode<T> rightChild = null)
-        {
-            Data = data;
-            this.leftChild = leftChild as TreeNode<T>;
-            this.rightChild = rightChild as TreeNode<T>;
-
-            return this;
         }
         #endregion
     }

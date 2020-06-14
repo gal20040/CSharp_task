@@ -90,7 +90,7 @@
                 }
                 else
                 {
-                    currentNode.Update(currentNode.Data, new TreeNode<int>(value), currentNode.GetRightChild());
+                    currentNode.AddLeftChild(new TreeNode<int>(value));
                 }
             }
             else
@@ -103,7 +103,7 @@
                 }
                 else
                 {
-                    currentNode.Update(currentNode.Data, currentNode.GetLeftChild(), new TreeNode<int>(value));
+                    currentNode.AddRightChild(new TreeNode<int>(value));
                 }
             }
 

@@ -2,11 +2,21 @@
 {
     public interface ITreeNode<T>
     {
+        #region add child
+        /// <summary>Добавляет левого сына и только если его не было раньше</summary>
+        /// <returns>Возвращает текущий-обновлённый узел</returns>
+        ITreeNode<T> AddLeftChild(ITreeNode<T> leftChild);
+
+        /// <summary>Добавляет правого сына и только если его не было раньше</summary>
+        /// <returns>Возвращает текущий-обновлённый узел</returns>
+        ITreeNode<T> AddRightChild(ITreeNode<T> rightChild);
+        #endregion
+
         #region get children
-        /// <summary>Вернуть левого сына</summary>
+        /// <summary>Возвращает левого сына</summary>
         ITreeNode<T> GetLeftChild();
 
-        /// <summary>Вернуть правого сына</summary>
+        /// <summary>Возвращает правого сына</summary>
         ITreeNode<T> GetRightChild();
         #endregion
 
@@ -19,7 +29,7 @@
         #endregion
 
         #region CountLeaves
-        /// <summary>Подсчитать количество листьев в данном поддереве</summary>
+        /// <summary>Подсчитывает количество листьев в данном поддереве</summary>
         int CountLeaves();
 
         /// <summary>Является ли данный узел листом</summary>
@@ -34,9 +44,5 @@
 
         /// <summary>Представляет текущий узел и всех его потомков в виде строки через пробел с InOrder обходом</summary>
         string ToString();
-
-        /// <summary>Обновляет текущий узел: значение, левого или правого сына</summary>
-        /// <returns>Вернуть обновлённый узел</returns>
-        TreeNode<T> Update(T data, ITreeNode<T> leftChild = null, ITreeNode<T> rightChild = null);
     }
 }

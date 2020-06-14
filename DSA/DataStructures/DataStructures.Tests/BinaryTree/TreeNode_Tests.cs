@@ -23,7 +23,7 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        #region Test for ctor
+        #region ctors
         [TestMethod]
         public void CreateTreeNode()
         {
@@ -392,6 +392,100 @@ namespace DataStructures.Tests.BinaryTree
 
             Assert.AreEqual(expectedTreeString, actualTreeString);
         }
+        #endregion
+
+        #region add child
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddLeftChild_nullAdded_ArgumentNullException()
+        {
+            var treeNode = new TreeNode<int>(1);
+
+            treeNode.AddLeftChild(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddRightChild_nullAdded_ArgumentNullException()
+        {
+            var treeNode = new TreeNode<int>(1);
+
+            treeNode.AddRightChild(null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddLeftChild_leftChildAlreadyPresented_ArgumentException()
+        {
+            var leftChild = new TreeNode<int>(1);
+            var treeNode = new TreeNode<int>(1, leftChild);
+
+            treeNode.AddLeftChild(leftChild);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddRightChild_rightChildAlreadyPresented_ArgumentException()
+        {
+            var rightChild = new TreeNode<int>(1);
+            var treeNode = new TreeNode<int>(1, null, rightChild);
+
+            treeNode.AddRightChild(rightChild);
+        }
+
+        [TestMethod]
+        public void AddLeftChild_leftChildAdded_ok()
+        {
+            const string expected = "1 2";
+            var treeNode = new TreeNode<int>(2);
+            var leftChild = new TreeNode<int>(1);
+
+            treeNode.AddLeftChild(leftChild);
+
+            var actual = treeNode.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void AddRightChild_rightChildAdded_ok()
+        {
+            const string expected = "2 3";
+            var treeNode = new TreeNode<int>(2);
+            var rightChild = new TreeNode<int>(3);
+
+            treeNode.AddRightChild(rightChild);
+
+            var actual = treeNode.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void AddRightChild_sameValueAsRightChildAdded_ok()
+        {
+            const string expected = "2 2";
+            var treeNode = new TreeNode<int>(2);
+            var rightChild = new TreeNode<int>(2);
+
+            treeNode.AddRightChild(rightChild);
+
+            var actual = treeNode.ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+        #endregion
+
+        #region 
+        #endregion
+
+        #region 
+        #endregion
+
+        #region 
+        #endregion
+
+        #region 
         #endregion
 
         #region 
