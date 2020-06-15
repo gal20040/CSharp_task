@@ -12,6 +12,16 @@
         ITreeNode<T> AddRightChild(ITreeNode<T> rightChild);
         #endregion
 
+        #region delete child
+        /// <summary>Удаляет левого сына</summary>
+        /// <returns>Возвращает только что удалённый узел</returns>
+        ITreeNode<T> DeleteLeftChild();
+
+        /// <summary>Удаляет правого сына</summary>
+        /// <returns>Возвращает только что удалённый узел</returns>
+        ITreeNode<T> DeleteRightChild();
+        #endregion
+
         #region get children
         /// <summary>Возвращает левого сына. Либо null</summary>
         ITreeNode<T> GetLeftChild();

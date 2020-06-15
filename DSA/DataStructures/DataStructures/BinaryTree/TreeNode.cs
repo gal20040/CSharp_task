@@ -133,6 +133,26 @@ namespace DataStructures.BinaryTree
         public bool IsLeaf() => !HasLeftChild() && !HasRightChild();
         #endregion
 
+        #region delete child
+        public ITreeNode<T> DeleteLeftChild()
+        {
+            var nodeForDelete = leftChild;
+
+            leftChild = null;
+
+            return nodeForDelete;
+        }
+
+        public ITreeNode<T> DeleteRightChild()
+        {
+            var nodeForDelete = rightChild;
+
+            rightChild = null;
+
+            return nodeForDelete;
+        }
+        #endregion
+
         #region Depth
         public int Depth() => Depth(this) - 1; //todo не знаю, как избавиться от лишнего уровня глубины
 
