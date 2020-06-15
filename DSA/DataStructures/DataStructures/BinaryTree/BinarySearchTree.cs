@@ -67,34 +67,43 @@
                 return rootNode;
             }
 
-            if (currentNode == null) currentNode = rootNode;
+            currentNode = rootNode;
+            currentNodeParent = null;
+            var newNode = new TreeNode<int>(value);
 
-            if (value < currentNode.Data)
+            while (currentNode != null)
             {
-                if (currentNode.HasLeftChild())
+                currentNodeParent = currentNode;
+
+                if (value < currentNode.Data)
                 {
-                    currentNode = currentNode.GetLeftChild() as TreeNode<int>;
-                    Insert(value);
+                    if (currentNode.HasLeftChild())
+                    {
+                        currentNode = currentNode.GetLeftChild() as TreeNode<int>;
+                    }
+                    else
+                    {
+                        currentNode.AddLeftChild(newNode);
+                        currentNode = newNode;
+
+                        break;
+                    }
                 }
                 else
                 {
-                    currentNode.AddLeftChild(new TreeNode<int>(value));
-                }
-            }
-            else
-            {
-                if (currentNode.HasRightChild())
-                {
-                    currentNode = currentNode.GetRightChild() as TreeNode<int>;
-                    Insert(value);
-                }
-                else
-                {
-                    currentNode.AddRightChild(new TreeNode<int>(value));
-                }
-            }
+                    if (currentNode.HasRightChild())
+                    {
+                        currentNode = currentNode.GetRightChild() as TreeNode<int>;
+                    }
+                    else
+                    {
+                        currentNode.AddRightChild(newNode);
+                        currentNode = newNode;
 
-            currentNode = null;
+                        break;
+                    }
+                }
+            }
 
             return currentNode;
         }
