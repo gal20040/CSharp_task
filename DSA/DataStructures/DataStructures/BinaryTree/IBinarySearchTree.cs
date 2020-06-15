@@ -2,8 +2,8 @@
 {
     public interface IBinarySearchTree<T>
     {
-         /// <summary>Используется деструктором, оператором присваивания и функцией ClearList</summary>
-        TreeNode<T> FindNode(T item, TreeNode<T> parent);
+        /// <summary>Используется деструктором, оператором присваивания и функцией ClearList</summary>
+        TreeNode<T> FindNode(T value, TreeNode<T> parent);
 
         /// <summary>Осуществляет поиск путем сравнения элемента с данными, хранящимися в узле.
         /// После выполнения текущая позиция соответствует совпавшему узлу.</summary>
@@ -13,19 +13,19 @@
         /// <summary>Находит подходящее для вставки место и добавляет новый элемент данных.
         /// После выполнения этого метода текущая позиция соответствует новому узлу.</summary>
         /// <returns>Возвращает только что добавленный узел</returns>
-        TreeNode<T> Insert(T item);
+        TreeNode<T> Insert(T value);
 
         /// <summary>Находит соответствующий узел,
         /// удаляет его и связывает все его поддеревья так,
         /// чтобы сохранить структуру бинарного дерева поиска.</summary>
         /// <returns>Возвращает только что удалённый узел</returns>
-        TreeNode<T> Delete(T item);
+        TreeNode<T> Delete(T value);
 
         /// <summary>Присваивает значение элемента данных узлу,
         /// если ключ в текущей позиции совпадает с ключом элемента данных.
         /// В противном случае вставляет элемент данных в дерево.</summary>
         /// <returns>Возвращает только что добавленный или обновлённый узел</returns>
-        TreeNode<T> Update(T item);
+        TreeNode<T> Update(T value);
 
         /// <summary>Возвращает корень дерева</summary>
         TreeNode<T> GetRoot();

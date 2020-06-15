@@ -1,4 +1,6 @@
-﻿namespace DataStructures.BinaryTree
+﻿using System;
+
+namespace DataStructures.BinaryTree
 {
     //todo: сначала сделаю на int, с дженериками как-то не задалось - простое сравнение не работает: Operator >= cannot be applied to operands of type 'int' and 'int'
     public class BinarySearchTree : IBinarySearchTree<int>
@@ -16,9 +18,96 @@
             throw new System.NotImplementedException();
         }
 
-        public TreeNode<int> Delete(int item)
+        public TreeNode<int> Delete(int value)
         {
-            throw new System.NotImplementedException();
+            var requiredNode = Find(value);
+
+            if (requiredNode == null)
+            {
+                //нет такого значения, нечего удалять
+                return requiredNode;
+            }
+
+            return Delete(requiredNode);
+        }
+
+        private TreeNode<int> Delete(TreeNode<int> requiredNode)
+        {
+            //удаляемый узел не имеет потомков - просто удаляем его у его родителя.
+            if (requiredNode.IsLeaf())
+            {
+                if (currentNodeParent == null)
+                {
+                    //удаляемый узел является корнем и единственным узлом в дереве - удаляем только его.
+                    rootNode = null;
+
+                    //возвращаем удалённый узел
+                    return requiredNode;
+                }
+
+                if (requiredNode.Data < currentNodeParent.Data)
+                {
+                    currentNodeParent.DeleteLeftChild();
+                }
+                else
+                {
+                    currentNodeParent.DeleteRightChild();
+                }
+
+                //возвращаем удалённый узел
+                return requiredNode;
+            }
+
+            bool requiredNodeIsLeftChild = false;
+            if (requiredNode.Data < currentNodeParent.Data)
+            {
+                requiredNodeIsLeftChild = true;
+            }
+
+            //удаляемый узел имеет только левого сына - присоединить левое поддерево узла к его родителю.
+            if (requiredNode.HasLeftChild() &&
+                !requiredNode.HasRightChild())
+            {
+                var leftChild = requiredNode.GetLeftChild();
+
+                if (requiredNodeIsLeftChild)
+                {
+                    currentNodeParent.DeleteLeftChild();
+                    currentNodeParent.AddLeftChild(leftChild);
+                }
+                else
+                {
+                    currentNodeParent.DeleteRightChild();
+                    currentNodeParent.AddRightChild(leftChild);
+                }
+
+                //возвращаем удалённый узел
+                return requiredNode;
+            }
+
+            //удаляемый узел имеет только правого сына - присоединить правое поддерево узла к его родителю.
+            if (!requiredNode.HasLeftChild() &&
+                requiredNode.HasRightChild())
+            {
+                var rightChild = requiredNode.GetRightChild();
+
+                if (requiredNodeIsLeftChild)
+                {
+                    currentNodeParent.DeleteLeftChild();
+                    currentNodeParent.AddLeftChild(rightChild);
+                }
+                else
+                {
+                    currentNodeParent.DeleteRightChild();
+                    currentNodeParent.AddRightChild(rightChild);
+                }
+
+                //возвращаем удалённый узел
+                return requiredNode;
+            }
+
+            //Удаление узла с двумя сыновьями
+            throw new NotImplementedException();
         }
 
         public TreeNode<int> Find(int value)
@@ -51,7 +140,7 @@
             return requiredNode;
         }
 
-        public TreeNode<int> FindNode(int item, TreeNode<int> parent)
+        public TreeNode<int> FindNode(int value, TreeNode<int> parent)
         {
             throw new System.NotImplementedException();
         }
@@ -63,7 +152,7 @@
             if (rootNode == null)
             {
                 rootNode = new TreeNode<int>(value);
-                
+
                 nodeCount++;
                 currentNodeParent = null;
                 currentNode = rootNode;
@@ -114,7 +203,7 @@
             return currentNode;
         }
 
-        public TreeNode<int> Update(int item)
+        public TreeNode<int> Update(int value)
         {
             throw new System.NotImplementedException();
         }
