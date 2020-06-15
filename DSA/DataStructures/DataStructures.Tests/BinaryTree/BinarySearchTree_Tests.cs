@@ -28,6 +28,36 @@ namespace DataStructures.Tests.BinaryTree
         }
 
         [TestMethod]
+        public void Insert_mixedTree2_ok()
+        {
+            const string expected = "4 19 19 19 28 34 37 37 48 53 56 57 72 76 83 90 99";
+
+            var actualTree = new BinarySearchTree();
+
+            actualTree.Insert(28);
+            actualTree.Insert(19);
+            actualTree.Insert(53);
+            actualTree.Insert(57);
+            actualTree.Insert(34);
+            actualTree.Insert(83);
+            actualTree.Insert(72);
+            actualTree.Insert(19);
+            actualTree.Insert(76);
+            actualTree.Insert(99);
+            actualTree.Insert(37);
+            actualTree.Insert(48);
+            actualTree.Insert(56);
+            actualTree.Insert(90);
+            actualTree.Insert(4);
+            actualTree.Insert(19);
+            actualTree.Insert(37);
+
+            var actual = actualTree.GetRoot().ToString();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void Insert_leftDegeneratedTree_ok()
         {
             const string expected = "10 20 30 40";

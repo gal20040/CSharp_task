@@ -63,8 +63,12 @@
             if (rootNode == null)
             {
                 rootNode = new TreeNode<int>(value);
+                
+                nodeCount++;
+                currentNodeParent = null;
+                currentNode = rootNode;
 
-                return rootNode;
+                return currentNode;
             }
 
             currentNode = rootNode;
@@ -104,6 +108,8 @@
                     }
                 }
             }
+
+            nodeCount++;
 
             return currentNode;
         }
