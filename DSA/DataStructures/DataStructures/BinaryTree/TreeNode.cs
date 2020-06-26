@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 namespace DataStructures.BinaryTree
 {
@@ -60,6 +61,44 @@ namespace DataStructures.BinaryTree
         public bool HasLeftChild() => leftChild != null;
 
         public bool HasRightChild() => rightChild != null;
+
+        public ITreeNode<T> GetNodeWithTheLargestValueFromTheLeft(out ITreeNode<T> parent)
+        {
+            parent = this;
+            var currentNode = leftChild;
+
+            while (currentNode != null)
+            {
+                if (currentNode.HasRightChild())
+                {
+                    parent = currentNode;
+                    currentNode = currentNode.rightChild; 
+                }
+                else
+                    break;
+            }
+
+            return currentNode;
+        }
+
+        public ITreeNode<T> GetNodeWithTheSmallestValueFromTheRight(out ITreeNode<T> parent)
+        {
+            parent = this;
+            var currentNode = rightChild;
+
+            while (currentNode != null)
+            {
+                if (currentNode.HasLeftChild())
+                {
+                    parent = currentNode;
+                    currentNode = currentNode.leftChild;
+                }
+                else
+                    break;
+            }
+
+            return currentNode;
+        }
         #endregion
 
         //#region Обход деревьев

@@ -28,6 +28,14 @@
 
         /// <summary>Возвращает правого сына. Либо null</summary>
         ITreeNode<T> GetRightChild();
+
+        /// <summary>Возвращает узел с наибольшим значением из левого поддерева. Либо null.<br/>
+        /// Тажке возвращает родителя найденного узла.</summary>
+        ITreeNode<T> GetNodeWithTheLargestValueFromTheLeft(out ITreeNode<T> parent);
+
+        /// <summary>Возвращает узел с наименьшим значением из правого поддерева. Либо null.<br/>
+        /// Тажке возвращает родителя найденного узла.</summary>
+        ITreeNode<T> GetNodeWithTheSmallestValueFromTheRight(out ITreeNode<T> parent);
         #endregion
 
         #region has child
