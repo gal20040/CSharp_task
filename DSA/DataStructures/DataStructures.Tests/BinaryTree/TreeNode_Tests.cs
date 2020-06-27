@@ -11,7 +11,6 @@ namespace DataStructures.Tests.BinaryTree
 
         private TreeNode<int> GetTreeWithNodes(int nodeCount)
         {
-            //test commit
             if (nodeCount <= 0) return null;
 
             var treeNodeData = random.Next();
