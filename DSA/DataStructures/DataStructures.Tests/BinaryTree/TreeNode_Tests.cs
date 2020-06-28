@@ -23,12 +23,6 @@ namespace DataStructures.Tests.BinaryTree
             return treeNode;
         }
 
-        [TestMethod]
-        public void FailedTest()
-        {
-            Assert.Fail();
-        }
-
         #region ctors
         [TestMethod]
         public void CreateTreeNode()
