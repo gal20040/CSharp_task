@@ -476,7 +476,56 @@ namespace DataStructures.Tests.BinaryTree
         }
         #endregion
 
-        #region 
+        #region GetNodeWithTheLargestValueFromTheLeft
+        [TestMethod]
+        public void GetNodeWithTheLargestValueFromTheLeft_emptyLeftSubtree_ok()
+        {
+            var rootNode = new TreeNode<int>(2);
+
+            var nodeWithTheLargestValueFromTheLeft = rootNode.GetNodeWithTheLargestValueFromTheLeft(out var parent);
+
+            Assert.IsNull(nodeWithTheLargestValueFromTheLeft);
+            Assert.AreEqual(rootNode, parent as TreeNode<int>);
+        }
+
+        [TestMethod]
+        public void GetNodeWithTheLargestValueFromTheLeft_onlyOneLeftChild_ok()
+        {
+            var expectedLargestNodeFromLeft = new TreeNode<int>(1);
+            var expectedParent = new TreeNode<int>(2, expectedLargestNodeFromLeft);
+
+            var actualLargestNodeFromLeft = expectedParent.GetNodeWithTheLargestValueFromTheLeft(out var actualParent);
+
+            Assert.AreEqual(expectedLargestNodeFromLeft.ToString(), actualLargestNodeFromLeft.ToString());
+            Assert.AreEqual(expectedParent.ToString(), (actualParent as TreeNode<int>).ToString());
+        }
+
+        [TestMethod]
+        public void GetNodeWithTheLargestValueFromTheLeft_onlyOneRightChild_ok()
+        {
+            var expectedLargestNodeFromLeft = new TreeNode<int>(15);
+            var expectedParent = new TreeNode<int>(10, null, expectedLargestNodeFromLeft);
+            var rootNode = new TreeNode<int>(20, expectedParent);
+
+            var actualLargestNodeFromLeft = rootNode.GetNodeWithTheLargestValueFromTheLeft(out var actualParent);
+
+            Assert.AreEqual(expectedLargestNodeFromLeft.ToString(), actualLargestNodeFromLeft.ToString());
+            Assert.AreEqual(expectedParent.ToString(), (actualParent as TreeNode<int>).ToString());
+        }
+
+        [TestMethod]
+        public void GetNodeWithTheLargestValueFromTheLeft_onPreparedBranchedTree_ok()
+        {
+            var leftChild = new TreeNode<int>(4);
+            var expectedLargestNodeFromLeft = new TreeNode<int>(5);
+            var expectedParent = new TreeNode<int>(2, leftChild, expectedLargestNodeFromLeft);
+            var rootNode = GetPreparedTree();
+
+            var actualLargestNodeFromLeft = rootNode.GetNodeWithTheLargestValueFromTheLeft(out var actualParent);
+
+            Assert.AreEqual(expectedLargestNodeFromLeft.ToString(), actualLargestNodeFromLeft.ToString());
+            Assert.AreEqual(expectedParent.ToString(), (actualParent as TreeNode<int>).ToString());
+        }
         #endregion
 
         #region 
